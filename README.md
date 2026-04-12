@@ -1,4 +1,4 @@
-# How the White House hit peak meme
+# White House Peak Memes
 
 Last month, the White House’s TikTok account began posting a series of meme-style videos about U.S. military strikes that looked less like official communication and more like internet content. I wanted to understand how a government account got there, particularly whether this was a one-off anomaly, or the endpoint of a broader shift in how state power is presented online.
 
