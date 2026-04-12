@@ -73,21 +73,14 @@
         const wv = document.getElementById("wh-vid");
         if (wv) wv.pause();
 
-        svgEl.style.display = "none";
-
         // Hide strike lineage
         VizStrike.hide();
-
-        // Hide comparison/profanity
 
         // Hide counter
         statCounter.style.opacity = "0";
 
         // Hide audio button
         audioBtn.classList.remove("visible");
-
-        // Restore SVG
-        svgEl.style.display = "";
     }
 
     // ─── Mobile quadrant positioning ───
@@ -149,12 +142,28 @@
         audioBtn.classList.add("visible");
     }
 
-    // ─── Main state handler ───
+    // ─── Main state handler (rAF-batched to prevent mobile flicker) ───
+    let _pendingState = null;
+    let _rafId = null;
+    const _vizContainer = document.getElementById("viz-container");
+
     function updateViz(newState) {
+        if (newState === currentState) return;
+        _pendingState = newState;
+        if (_rafId) return;
+        _rafId = requestAnimationFrame(_applyState);
+    }
+
+    function _applyState() {
+        _rafId = null;
+        const newState = _pendingState;
         if (newState === currentState) return;
         const prevState = currentState;
         currentState = newState;
         console.log(`State: ${prevState} → ${newState}`);
+
+        // Suppress CSS transitions during reset→rebuild (prevents flicker)
+        _vizContainer.classList.add("notransition");
 
         // Reset everything to neutral first
         resetAll();
@@ -442,6 +451,12 @@
                 VizGrid.highlight("all-final");
                 break;
         }
+
+        // Update nav arrows
+        updateNavVisibility();
+
+        // Re-enable CSS transitions on next paint
+        requestAnimationFrame(() => _vizContainer.classList.remove("notransition"));
     }
 
     // ─── ScrollTriggers ───
@@ -475,28 +490,6 @@
             stepNav.classList.remove("visible");
         }
     }
-
-    // Patch updateViz to also update nav
-    const origUpdateViz = updateViz;
-    function updateVizWithNav(newState) {
-        origUpdateViz(newState);
-        updateNavVisibility();
-    }
-    // Re-bind scroll triggers
-    allSteps.forEach(step => {
-        ScrollTrigger.getAll().forEach(st => {
-            if (st.trigger === step) {
-                st.kill();
-            }
-        });
-        ScrollTrigger.create({
-            trigger: step,
-            start: "top 40%",
-            end: "bottom 40%",
-            onEnter: () => updateVizWithNav(step.dataset.state),
-            onEnterBack: () => updateVizWithNav(step.dataset.state),
-        });
-    });
 
     window.stepNav = function(dir) {
         const stepArr = Array.from(allSteps);

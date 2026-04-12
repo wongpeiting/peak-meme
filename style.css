@@ -150,6 +150,11 @@ body {
     z-index: 10;
 }
 
+/* Suppress CSS transitions during state swaps (prevents mobile flicker) */
+.notransition, .notransition * {
+    transition: none !important;
+}
+
 .eye-text {
     position: fixed;
     top: 50%;

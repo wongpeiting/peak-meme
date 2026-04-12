@@ -15,8 +15,9 @@ const openTl = gsap.timeline({
         start: "top top",
         end: "+=" + SCROLL_DISTANCE,
         pin: true,
-        scrub: 1,
+        scrub: IS_MOBILE ? 0.3 : 1,
         anticipatePin: 1,
+        fastScrollEnd: IS_MOBILE ? 300 : false,
     }
 });
 
@@ -135,8 +136,9 @@ const closeTl = gsap.timeline({
         start: "top top",
         end: "+=" + (IS_MOBILE ? SCROLL_DISTANCE * 0.7 : SCROLL_DISTANCE * 0.35),
         pin: true,
-        scrub: 1,
+        scrub: IS_MOBILE ? 0.3 : 1,
         anticipatePin: 1,
+        fastScrollEnd: IS_MOBILE ? 300 : false,
     }
 });
 
