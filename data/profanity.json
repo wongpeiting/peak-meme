@@ -1,0 +1,514 @@
+{
+  "summary": {
+    "total": 35,
+    "not_on_instagram": 24,
+    "scrubbed_for_instagram": 3,
+    "on_instagram_as_is": 8,
+    "uncensored_count": 14
+  },
+  "posts": [
+    {
+      "id": "7540745321232567566",
+      "date": "2025-08-20",
+      "caption": "All we do is win",
+      "views": 1000000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "bleeped",
+      "source": "Movie/meme clip",
+      "on_instagram": "yes",
+      "subject": "promotion",
+      "packaging_level": 5
+    },
+    {
+      "id": "7545165161884028174",
+      "date": "2025-09-01",
+      "caption": "",
+      "views": 218300,
+      "words": [
+        "fuck",
+        "shit"
+      ],
+      "treatment": "bleeped",
+      "source": "Step Brothers clip",
+      "on_instagram": "no",
+      "subject": "promotion",
+      "packaging_level": 5
+    },
+    {
+      "id": "7550419008806194487",
+      "date": "2025-09-15",
+      "caption": "FAFO. ",
+      "views": 379100,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "obscured",
+      "source": "Caption/acronym (FAFO)",
+      "on_instagram": "yes_scrubbed",
+      "subject": "war",
+      "packaging_level": 1
+    },
+    {
+      "id": "7552932531029527863",
+      "date": "2025-09-22",
+      "caption": "For Charlie ",
+      "views": 986900,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "uncensored",
+      "source": "The Hangover audio clip",
+      "on_instagram": "no",
+      "subject": "promotion",
+      "packaging_level": 6
+    },
+    {
+      "id": "7553739241390443790",
+      "date": "2025-09-24",
+      "caption": "VP Vance speaking the truth\ud83d\udd25 ",
+      "views": 615100,
+      "words": [
+        "hell"
+      ],
+      "treatment": "uncensored",
+      "source": "JD Vance direct speech",
+      "on_instagram": "no",
+      "subject": "opponents",
+      "packaging_level": 1
+    },
+    {
+      "id": "7558104899855174926",
+      "date": "2025-10-06",
+      "caption": "The longer the dems keep the gov shutdown the bigger the sombrero gets \ud83e\ude87",
+      "views": 715700,
+      "words": [
+        "bullshit"
+      ],
+      "treatment": "uncensored",
+      "source": "AI-generated voice mocking Schumer",
+      "on_instagram": "yes",
+      "subject": "opponents",
+      "packaging_level": 6
+    },
+    {
+      "id": "7562259783189875981",
+      "date": "2025-10-17",
+      "caption": "FAFO. ",
+      "views": 1000000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "uncensored",
+      "source": "Trump direct speech + caption FAFO",
+      "on_instagram": "no",
+      "subject": "opponents",
+      "packaging_level": 1
+    },
+    {
+      "id": "7563107264618302775",
+      "date": "2025-10-20",
+      "caption": "Still our king \ud83c\uddfa\ud83c\uddf8 MAGA. ",
+      "views": 1200000,
+      "words": [
+        "ass"
+      ],
+      "treatment": "uncensored",
+      "source": "Trump direct speech",
+      "on_instagram": "no",
+      "subject": "governance",
+      "packaging_level": 1
+    },
+    {
+      "id": "7563414761891810615",
+      "date": "2025-10-20",
+      "caption": "2 Million followers - LFG!!!",
+      "views": 2500000,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "obscured",
+      "source": "Caption/acronym (LFG)",
+      "on_instagram": "no",
+      "subject": "promotion",
+      "packaging_level": 3
+    },
+    {
+      "id": "7564803038414654734",
+      "date": "2025-10-24",
+      "caption": "Can\u2019t stop winning \ud83d\udd25",
+      "views": 1500000,
+      "words": [
+        "ass",
+        "bitch",
+        "motherfucking"
+      ],
+      "treatment": "uncensored",
+      "source": "Text overlay + rap song Victory Lap Five",
+      "on_instagram": "no",
+      "subject": "trump",
+      "packaging_level": 3
+    },
+    {
+      "id": "7565996675370618167",
+      "date": "2025-10-27",
+      "caption": "Democrats are making this WAY harder than it has to be. Open the government. ",
+      "views": 3600000,
+      "words": [
+        "fucking",
+        "shit"
+      ],
+      "treatment": "bleeped",
+      "source": "Wolf of Wall Street + Rick & Morty clips",
+      "on_instagram": "yes",
+      "subject": "opponents",
+      "packaging_level": 5
+    },
+    {
+      "id": "7569437489031548174",
+      "date": "2025-11-06",
+      "caption": "One year since the lib MELTDOWN ",
+      "views": 3600000,
+      "words": [
+        "fucking",
+        "motherfucking"
+      ],
+      "treatment": "bleeped",
+      "source": "Mashup of TikTok posts",
+      "on_instagram": "no",
+      "subject": "trump",
+      "packaging_level": 6
+    },
+    {
+      "id": "7581931799983492365",
+      "date": "2025-12-09",
+      "caption": "Then vs now. \ud83d\ude24",
+      "views": 8500000,
+      "words": [
+        "fuck",
+        "hoes",
+        "niggas"
+      ],
+      "treatment": "bleeped",
+      "source": "Money In The Grave x Last Christmas rap",
+      "on_instagram": "no",
+      "subject": "culture",
+      "packaging_level": 6
+    },
+    {
+      "id": "7584530763320708365",
+      "date": "2025-12-16",
+      "caption": "And that\u2019s a VERY Merry Christmas to you \ud83d\ude0c",
+      "views": 1700000,
+      "words": [
+        "niggas"
+      ],
+      "treatment": "uncensored",
+      "source": "Many Men by 50 Cent",
+      "on_instagram": "yes_scrubbed",
+      "subject": "trump",
+      "packaging_level": 4
+    },
+    {
+      "id": "7588384715766271263",
+      "date": "2025-12-27",
+      "caption": "THE YEAR OF INVESTMENTS - OVER 9.6 Trillion into the U.S. \ud83c\uddfa\ud83c\uddf8",
+      "views": 6700000,
+      "words": [
+        "shit"
+      ],
+      "treatment": "uncensored",
+      "source": "NOKIA by Drake",
+      "on_instagram": "no",
+      "subject": "governance",
+      "packaging_level": 4
+    },
+    {
+      "id": "7589663943942081805",
+      "date": "2025-12-30",
+      "caption": "More of this in 2026 pls \ud83d\ude4f",
+      "views": 2900000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "uncensored",
+      "source": "Trump direct speech",
+      "on_instagram": "no",
+      "subject": "trump",
+      "packaging_level": 6
+    },
+    {
+      "id": "7589663943942081805",
+      "date": "2025-12-30",
+      "caption": "More of this in 2026 pls \ud83d\ude4f",
+      "views": 2900000,
+      "words": [
+        "bitch",
+        "nigga",
+        "fuck",
+        "ass"
+      ],
+      "treatment": "uncensored",
+      "source": "Up by Cardi B",
+      "on_instagram": "no",
+      "subject": "trump",
+      "packaging_level": 6
+    },
+    {
+      "id": "7590094149332864286",
+      "date": "2025-12-31",
+      "caption": "THE YEAR AMERICA LEVELED UP \ud83d\udd25 LFG ",
+      "views": 2300000,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "obscured",
+      "source": "Caption/acronym (LFG)",
+      "on_instagram": "yes",
+      "subject": "trump",
+      "packaging_level": 4
+    },
+    {
+      "id": "7591235697151855886",
+      "date": "2026-01-03",
+      "caption": "FAFO. ",
+      "views": 80700000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "obscured",
+      "source": "Caption (FAFO)",
+      "on_instagram": "yes_scrubbed",
+      "subject": "war",
+      "packaging_level": 6
+    },
+    {
+      "id": "7591331492471655735",
+      "date": "2026-01-04",
+      "caption": "Nicolas Maduro had his chance - until he didn\u2019t. ",
+      "views": 18200000,
+      "words": [
+        "fucked"
+      ],
+      "treatment": "obscured",
+      "source": "Pete Hegseth speech (F-ed)",
+      "on_instagram": "yes",
+      "subject": "war",
+      "packaging_level": 4
+    },
+    {
+      "id": "7591998660292971806",
+      "date": "2026-01-05",
+      "caption": "LFG!! \ud83e\udd85",
+      "views": 4500000,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "bleeped",
+      "source": "Caption LFG + bleeped voiceover",
+      "on_instagram": "no",
+      "subject": "war",
+      "packaging_level": 4
+    },
+    {
+      "id": "7593488230641585463",
+      "date": "2026-01-09",
+      "caption": "The far left\u2019s dangerous rhetoric on ICE. STAND WITH ICE \ud83e\uddca",
+      "views": 2000000,
+      "words": [
+        "fucking",
+        "bitch"
+      ],
+      "treatment": "bleeped",
+      "source": "Clips of ICE protestors",
+      "on_instagram": "yes",
+      "subject": "enforcement",
+      "packaging_level": 3
+    },
+    {
+      "id": "7593488230641585463",
+      "date": "2026-01-09",
+      "caption": "The far left\u2019s dangerous rhetoric on ICE. STAND WITH ICE \ud83e\uddca",
+      "views": 2000000,
+      "words": [
+        "fuck",
+        "bitches"
+      ],
+      "treatment": "bleeped",
+      "source": "Timothee Chalamet rap remix",
+      "on_instagram": "no",
+      "subject": "enforcement",
+      "packaging_level": 3
+    },
+    {
+      "id": "7594121064146406670",
+      "date": "2026-01-11",
+      "caption": "Border is LOCKED \ud83d\udd12",
+      "views": 22900000,
+      "words": [
+        "motherfucker"
+      ],
+      "treatment": "bleeped",
+      "source": "Movie clip",
+      "on_instagram": "no",
+      "subject": "enforcement",
+      "packaging_level": 5
+    },
+    {
+      "id": "7597107880822689038",
+      "date": "2026-01-19",
+      "caption": "Everybody wants the view but no one wants the climb. ",
+      "views": 793000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "uncensored",
+      "source": "Text overlay + voiceover",
+      "on_instagram": "no",
+      "subject": "trump",
+      "packaging_level": 4
+    },
+    {
+      "id": "7598396185019288887",
+      "date": "2026-01-23",
+      "caption": "LOUDER FOR THE PEOPLE IN THE BACK \ud83d\udde3\ufe0f",
+      "views": 3500000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "uncensored",
+      "source": "TikTok reaction post",
+      "on_instagram": "no",
+      "subject": "enforcement",
+      "packaging_level": 4
+    },
+    {
+      "id": "7598783230824746254",
+      "date": "2026-01-24",
+      "caption": "ONE YEAR OF MAGA\u2026 Kind of a big deal ",
+      "views": 2200000,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "uncensored",
+      "source": "Deadpool & Wolverine clip",
+      "on_instagram": "no",
+      "subject": "promotion",
+      "packaging_level": 5
+    },
+    {
+      "id": "7599476816474066207",
+      "date": "2026-01-26",
+      "caption": "Dangerous anti-ICE rhetoric from Mayor Frey & Gov Walz hasn\u2019t protected anyone -",
+      "views": 866500,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "bleeped",
+      "source": "Mayor Jacob Frey speech",
+      "on_instagram": "yes",
+      "subject": "opponents",
+      "packaging_level": 3
+    },
+    {
+      "id": "7602696263494159629",
+      "date": "2026-02-03",
+      "caption": "A secure border? F@$K YA BROTHER \ud83e\udd85",
+      "views": 5100000,
+      "words": [
+        "fuck",
+        "fucking"
+      ],
+      "treatment": "uncensored",
+      "source": "Caption + Hell Yeah Brother song",
+      "on_instagram": "no",
+      "subject": "enforcement",
+      "packaging_level": 4
+    },
+    {
+      "id": "7603815629858098446",
+      "date": "2026-02-06",
+      "caption": "RAHHH AMERICA LFG \ud83e\udd85",
+      "views": 933000,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "obscured",
+      "source": "Caption (LFG)",
+      "on_instagram": "no",
+      "subject": "culture",
+      "packaging_level": 3
+    },
+    {
+      "id": "7608400851270454542",
+      "date": "2026-02-19",
+      "caption": "You\u2019ll see how much you appreciate the USA \ud83d\udd25\u2604\ufe0f",
+      "views": 3400000,
+      "words": [
+        "fuck"
+      ],
+      "treatment": "bleeped",
+      "source": "Pitbull stage rant",
+      "on_instagram": "no",
+      "subject": "trump",
+      "packaging_level": 5
+    },
+    {
+      "id": "7609740037386702093",
+      "date": "2026-02-22",
+      "caption": "Silver does NOT shine just as bright \ud83e\udd47\ud83e\udd85",
+      "views": 12300000,
+      "words": [
+        "fucks"
+      ],
+      "treatment": "bleeped",
+      "source": "AI-doctored video",
+      "on_instagram": "no",
+      "subject": "culture",
+      "packaging_level": 3
+    },
+    {
+      "id": "7614181238861073694",
+      "date": "2026-03-06",
+      "caption": "LOCKED IN \u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f",
+      "views": 3900000,
+      "words": [
+        "shit"
+      ],
+      "treatment": "uncensored",
+      "source": "GTA: San Andreas clip",
+      "on_instagram": "yes",
+      "subject": "war",
+      "packaging_level": 7
+    },
+    {
+      "id": "7615311745476857101",
+      "date": "2026-03-09",
+      "caption": "Can\u2019t say he didn\u2019t warn them. \ud83e\udd85",
+      "views": 25200000,
+      "words": [
+        "shit"
+      ],
+      "treatment": "uncensored",
+      "source": "Trump direct speech",
+      "on_instagram": "no",
+      "subject": "war",
+      "packaging_level": 3
+    },
+    {
+      "id": "7618668141467536653",
+      "date": "2026-03-18",
+      "caption": "$10.5 TRILLION IN 1 YEAR \ud83e\udd11",
+      "views": 2900000,
+      "words": [
+        "fucking"
+      ],
+      "treatment": "bleeped",
+      "source": "Wolf of Wall Street clip",
+      "on_instagram": "no",
+      "subject": "governance",
+      "packaging_level": 5
+    }
+  ]
+}

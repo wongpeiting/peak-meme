@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Is Fine.</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500&family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <button class="audio-btn" id="audio-btn" onclick="toggleAudio()">
+        <span class="audio-icon" id="audio-icon">&#128263;</span>
+        <span class="audio-label" id="audio-label">Tap for sound</span>
+    </button>
+    <script>
+        window.audioEnabled = false;
+        function toggleAudio() {
+            window.audioEnabled = !window.audioEnabled;
+            document.getElementById("audio-icon").innerHTML = window.audioEnabled ? "&#128266;" : "&#128263;";
+            document.getElementById("audio-label").textContent = window.audioEnabled ? "" : "Tap for sound";
+            // Unmute/mute all video elements
+            document.querySelectorAll("video").forEach(function(v) { v.muted = !window.audioEnabled; });
+        }
+    </script>
+
+    <!-- Opening: White bg, meme, intro text -->
+    <section id="opening">
+        <div class="scene-inner">
+            <img src="images/1-on-fire.png" id="meme-open" class="meme-img"
+                 alt="This Is Fine dog sitting in burning room">
+            <p class="intro-text">We need to talk about the White House's TikTok account.</p>
+            <p class="content-warning">This story contains graphic footage, strong language, and scenes that some viewers may find disturbing. Viewer discretion is advised.</p>
+        </div>
+        <div class="black-overlay" id="overlay-in"></div>
+        <p class="eye-text" id="eye-text">An explosion flashes across the screen.</p>
+    </section>
+
+    <!-- Article: Inside the dog's eye (black) -->
+    <section id="article">
+
+        <!-- Sticky viz container — stays pinned while steps scroll over it -->
+        <div id="viz-container">
+            <svg id="viz-svg" preserveAspectRatio="xMidYMid meet"></svg>
+            <div id="viz-grid"></div>
+            <div id="video-overlay">
+                <video id="inline-vid" playsinline loop muted></video>
+                <div id="vid-caption"></div>
+            </div>
+            <div id="video-overlay-2">
+                <video id="inline-vid-2" playsinline loop muted></video>
+            </div>
+            <div id="video-overlay-3">
+                <video id="inline-vid-3" playsinline loop muted></video>
+            </div>
+            <div id="video-overlay-4">
+                <video id="inline-vid-4" playsinline loop muted></video>
+            </div>
+            <!-- Lineage focus card (inside viz-container so it sticks) -->
+            <div id="lin-focus" style="display:none;position:absolute;inset:0;z-index:30;background:#0a0a0f;">
+                <div id="lin-timeline"></div>
+                <div id="lin-card" style="position:absolute;top:54%;left:50%;transform:translate(-50%,-50%);display:flex;gap:28px;align-items:center;opacity:0;transition:opacity 0.5s;"></div>
+            </div>
+            <div id="comparison-panel">
+                <div id="comp-ancestor"></div>
+                <div id="comp-arrow">&#x2192;</div>
+                <div id="comp-peak"></div>
+                <div id="comp-mutation"></div>
+            </div>
+            <div id="stat-counter"></div>
+            <div id="step-nav">
+                <button id="nav-prev" onclick="stepNav(-1)" title="Left arrow key">&#9666;</button>
+                <span class="nav-hint">scroll or use<br>arrow keys</span>
+                <button id="nav-next" onclick="stepNav(1)" title="Right arrow key">&#9656;</button>
+            </div>
+        </div>
+
+        <!-- Scrolling text steps -->
+        <div class="article-steps">
+
+            <!-- Phase 1: text-1 is inside the opening (fades in during zoom, scrolls up naturally) -->
+            <div class="a-step" data-state="text-2">
+                <div class="step-card step-card--center step-card--dramatic step-card--fixed">
+                    <p>Then it happens again.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="text-3">
+                <div class="step-card step-card--center step-card--dramatic step-card--fixed">
+                    <p>And again.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="text-4">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>Each time, it lands a little differently — cut to a beat, overlaid with graphics, trimmed into a loop that feels less like official messaging and more like something engineered for the churn of the feed.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="text-5">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>It's brainrot meets war content.</p>
+                </div>
+            </div>
+
+            <!-- Phase 3: Grid reveals with text-6 -->
+            <div class="a-step a-step--tall" data-state="zoom-out-grid">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>But these aren’t videos coming from meme pages or anonymous accounts. They’re posted by the White House.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="war-memes-all">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>They are part of the 12 recent posts that mark the first time a White House account packaged real combat footage as internet entertainment.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="broader-shift">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>This didn’t emerge in isolation. It sits at the far end of a broader shift, where official messaging is routinely recut using the language of the internet.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="headline" style="padding:0;">
+                <div class="step-card step-card--headline">
+                    <h1>HOW THE WHITE HOUSE<br>HIT PEAK MEME</h1>
+                    <p class="dek">The White House crossed 600 TikToks on April 1. I classified its first 600 posts and found a government account steadily pushing the boundary between institutional communication and internet entertainment.</p>
+                    <p class="byline">By Wong Pei Ting</p>
+                    <p class="pub-date">April 12, 2026</p>
+                </div>
+            </div>
+
+            <!-- Transition to lineage -->
+            <div class="a-step a-step--tall" data-state="pre-lineage">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>To see how far the account went, let's start with how it first handled military footage.</p>
+                </div>
+            </div>
+
+            <!-- ═══ STRIKE LINEAGE ═══ -->
+            <div class="a-step" data-state="lin-0"></div>
+            <div class="a-step" data-state="lin-prod-0"></div>
+            <div class="a-step" data-state="lin-prod-1"></div>
+            <div class="a-step" data-state="lin-prod-2"></div>
+            <div class="a-step" data-state="lin-prod-grid"></div>
+
+            <!-- ═══ GAME LINEAGE ═══ -->
+            <div class="a-step a-step--tall" data-state="lin-game-intro">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>These techniques did not appear overnight. Before the war, the account had already been compositing fictional elements onto real footage, testing the format on policy and opponents.</p>
+                </div>
+            </div>
+            <div class="a-step" data-state="lin-game-0"></div>
+            <div class="a-step" data-state="lin-game-1"></div>
+            <div class="a-step" data-state="lin-game-opponents"></div>
+            <div class="a-step" data-state="lin-game-2"></div>
+            <div class="a-step" data-state="lin-game-3"></div>
+
+            <!-- ═══ TROLL LINEAGE ═══ -->
+            <div class="a-step a-step--tall" data-state="lin-troll-intro">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>There was a parallel escalation in tone. Across 84 posts, the account engineered content for maximum provocation, with the punchlines getting darker and the fabrication getting bolder.</p>
+                </div>
+            </div>
+            <div class="a-step" data-state="lin-troll-0"></div>
+            <div class="a-step" data-state="lin-troll-1"></div>
+            <div class="a-step" data-state="lin-troll-2"></div>
+            <div class="a-step" data-state="lin-troll-3"></div>
+            <div class="a-step" data-state="lin-troll-4"></div>
+            <div class="a-step" data-state="lin-troll-5"></div>
+
+            <!-- ═══ EXPLETIVE LINEAGE ═══ -->
+            <div class="a-step a-step--tall" data-state="lin-exp-intro">
+                <div class="step-card step-card--center step-card--dramatic">
+                    <p>The language escalated too. Across 35 posts, the account pushed profanity from coded acronyms to uncensored speech.</p>
+                </div>
+            </div>
+            <div class="a-step" data-state="lin-exp-0"></div>
+            <div class="a-step" data-state="lin-exp-1"></div>
+            <div class="a-step" data-state="lin-exp-2"></div>
+            <div class="a-step" data-state="lin-exp-3"></div>
+            <div class="a-step" data-state="lin-exp-4"></div>
+            <div class="a-step" data-state="profanity-sources"></div>
+            <div class="a-step" data-state="profanity"></div>
+            <div class="a-step" data-state="lin-exp-5"></div>
+            <div class="a-step" data-state="lin-exp-6"></div>
+
+            <div class="a-step a-step--short" data-state="grid-return"></div>
+
+            <div class="a-step" data-state="grid-final">
+                <div class="step-card step-card--center step-card--dramatic" style="max-width:560px;">
+                    <p style="font-size:clamp(1rem,4vw,1.5rem);line-height:1.6;">The algorithm rewarded every level of escalation. The higher the packaging level, the more views each post averaged.</p>
+                    <div id="pkg-chart" style="margin-top:32px;margin-bottom:24px;display:flex;flex-direction:column;gap:6px;"></div>
+                </div>
+            </div>
+
+            <div class="a-step a-step--tall" data-state="kicker" style="padding:0;">
+                <div class="step-card step-card--headline" style="font-size:clamp(1rem,4vw,1.5rem);padding:3rem 2rem;">
+                    <p>The White House gamed TikTok, TikTok built algorithms to keep us watching, and we kept watching.</p>
+                    <p class="step-accent" style="margin-top:1rem;">The dog never left the room. Neither did we.</p>
+                </div>
+            </div>
+
+            <!-- Spacer to keep grid pinned through the end -->
+            <div style="min-height:100dvh;"></div>
+
+        </div>
+    </section>
+
+    <!-- Closing: Zoom out from eye, reveal 2nd panel -->
+    <section id="closing">
+        <div class="scene-inner">
+            <img src="images/2-this-is-fine.png" id="meme-close" class="meme-img"
+                 alt="This Is Fine dog saying This Is Fine">
+            <p class="outro-text"><a href="https://wongpeiting.github.io/peak-meme/" target="_blank" rel="noopener">Data and Methodology</a></p>
+            <p class="outro-author"><a href="https://wongpeiting.github.io/" target="_blank" rel="noopener">About the author</a></p>
+        </div>
+        <div class="black-overlay" id="overlay-out"></div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="scroll.js"></script>
+    <script src="viz-grid.js"></script>
+    <script src="viz-strike.js"></script>
+    <script src="article.js"></script>
+</body>
+</html>

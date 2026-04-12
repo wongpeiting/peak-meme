@@ -1,0 +1,238 @@
+{
+  "target": {
+    "post_num": 545,
+    "id": "7616166285625347342",
+    "label": "STRIKE",
+    "date": "2026-03-12",
+    "views": 6300000,
+    "note": "This post combined Pete Weber's bowling celebration, animated bowling pins labelled 'WE WON'T STOP MAKING NUCLEAR WEAPONS,' and real airstrike footage. Every element the account had tested separately \u2014 sports spectacle, game-UI overlays, troll punchlines, real military operations \u2014 fused into a single post.",
+    "caption": "STRIKE \ud83d\udca5\ud83e\udd85"
+  },
+  "contrast": [
+    {
+      "post_num": 55,
+      "id": "7545620347408813326",
+      "label": "#55 First military footage",
+      "date": "2025-09-02",
+      "views": 900000,
+      "note": "The treatment was plain. The 'unclassified' clips were posted without music or sound.",
+      "caption": "BEWARE "
+    },
+    {
+      "post_num": 96,
+      "id": "7550419008806194487",
+      "label": "#96 FAFO (early)",
+      "date": "2025-09-15",
+      "views": 379100,
+      "note": "",
+      "caption": "FAFO. "
+    }
+  ],
+  "produced": [
+    {
+      "post_num": 370,
+      "id": "7591174951818792247",
+      "label": "God Bless the Military",
+      "date": "2026-01-03",
+      "views": 7100000,
+      "caption": "God Bless the United States Military \ud83c\uddfa\ud83c\uddf8",
+      "phase": "",
+      "note": "The first time the footage was set to music was when the US launched a military strike in Venezuela to capture its leader, Nicol\u00e1s Maduro. The chosen track was 'Fortunate Son' by Creedence Clearwater Revival, a Vietnam-era rock anthem for the anti-war movement."
+    },
+    {
+      "post_num": 380,
+      "id": "7593044862589488398",
+      "label": "Game UI Food",
+      "date": "2026-01-08",
+      "views": 2900000,
+      "caption": "Out with the junk. In with REAL food. ",
+      "phase": "",
+      "note": "Five days later, the Venezuela footage reappeared in a post about dietary guidelines. Real explosions from the Venezuela strikes were spliced with CGI effects and scored to 'O Fortuna,' all in service of a message about junk food policy. This was the first time real military footage was used as disposable spectacle inside a completely unrelated post."
+    },
+    {
+      "post_num": 516,
+      "id": "7613406980719283486",
+      "label": "Lizard game UI",
+      "date": "2026-03-04",
+      "views": 9800000,
+      "caption": "Iran can never have a nuclear weapon. Will continue until the objectives are achieved. \ud83e\udd8e",
+      "phase": "",
+      "note": "After the Iran war kicked in on February 28, it took just four days for the White House to start memeifying combat footage. This time, airstrike footage was spliced with the 'lizard lizard lizard' meme, a viral clip from a Disney/Pixar movie teaser where an animated lizard taps the screen to fill it with emojis."
+    }
+  ],
+  "game_lineage": [
+    {
+      "post_num": 7,
+      "id": "7540745321232567566",
+      "label": "All we do is win",
+      "date": "2025-08-20",
+      "views": 1000000,
+      "caption": "All we do is win",
+      "note": "The technique appeared in the account's first week. Post #7 spliced a dizzying array of 'win' moments in pop culture into a highlight reel celebrating 200 days of President Donald Trump's presidency."
+    },
+    {
+      "post_num": 128,
+      "id": "7553070474821897527",
+      "label": "Pokemon ICE",
+      "date": "2025-09-23",
+      "views": 18700000,
+      "caption": "Gotta catch \u2018em all  \ud83c\udfa5: DHS",
+      "note": "A month later, the technique was applied to real government operations for the first time. A Pokemon theme song overlay was placed on ICE deportation raids, and it garnered more than 18 million views."
+    },
+    {
+      "post_num": 363,
+      "id": "7589735972003171639",
+      "label": "Minecraft Trump",
+      "date": "2025-12-30",
+      "views": 14500000,
+      "caption": "crafting the GOLDEN AGE \ud83d\udd25",
+      "note": "This was the first time a recognisable video game interface – a Minecraft crafting screen – was composited onto government footage. It was laid over Trump footage, framing his presidency as a game being won. It drew 14 over million views."
+    },
+    {
+      "post_num": 378,
+      "id": "7592334153111162126",
+      "label": "Spongebob weightlifting",
+      "date": "2026-01-06",
+      "views": 4600000,
+      "caption": "KEEP MEN OUT OF WOMEN'S SPORTS \ud83c\udfcb\ufe0f\u200d\u2640\ufe0f",
+      "note": "A scene of Spongebob doing weightlifting was used to mock trans athletes. Two months later, the same cartoon was repurposed for war, in which Spongebob repeatedly said 'You wanna see me do it again?' to real airstrike footage.",
+      "related_id": "7613864676010511629"
+    }
+  ],
+  "troll_lineage": [
+    {
+      "post_num": 3,
+      "id": "7540494832012233998",
+      "label": "I was the hunted",
+      "date": "2025-08-20",
+      "views": 1800000,
+      "caption": "'I was the hunted, and now I'm the hunter.'",
+      "note": "The account's third post set the tone for everything that followed. It was a montage of strongman quotes delivered without context, spliced with Trump dancing to YMCA and his phone ringing mid-meeting. The format was pure provocation, designed to entertain supporters and enrage critics in equal measure."
+    },
+    {
+      "post_num": 174,
+      "id": "7558104899855174926",
+      "label": "Sombrero AI voice",
+      "date": "2025-10-06",
+      "views": 715700,
+      "caption": "The longer the dems keep the gov shutdown the bigger the sombrero gets \ud83e\ude87",
+      "note": "Within two months, the provocation escalated from editing to fabrication. An AI-generated voice was used to impersonate Senator Chuck Schumer, putting the words 'woke, trans bulls---' into his mouth. A sitting senator was made to say things he never said."
+    },
+    {
+      "post_num": 314,
+      "id": "7580477408675892493",
+      "label": "Sabrina Carpenter PSA",
+      "date": "2025-12-05",
+      "views": 25300000,
+      "caption": "PSA: If you\u2019re a criminal illegal, you WILL be arrested & deported. \u2728",
+      "note": "The fabrication escalated from generating new speech to altering existing speech. A Saturday Night Live clip was doctored so Sabrina Carpenter appeared to say 'too illegal' instead of 'too hot,' turning a pop star's recorded words into an immigration enforcement message. It drew more than 25 million views."
+    },
+    {
+      "post_num": 323,
+      "id": "7582312611555888439",
+      "label": "Deportation Express",
+      "date": "2025-12-10",
+      "views": 38000000,
+      "caption": "All aboard the Deportation Express! Next stop: Back to where you came from \u2728",
+      "note": "ICE deportation flights were presented as The Polar Express, a children's Christmas movie. It drew 38 million views and proved that engineered trolling could break through at scale. The wider the gap between the format and the subject, the bigger the number."
+    },
+    {
+      "post_num": 335,
+      "id": "7584606961157541134",
+      "label": "Jingle all the way",
+      "date": "2025-12-16",
+      "views": 8400000,
+      "caption": "Jingle all the way \ud83c\udf36",
+      "note": "Six days later, the account rewrote Jingle Bells for deportation flights: 'Back to the places they came, oh what fun it is to ride a free flight out of our country.' ICE arrests were set to a Christmas song, and 8.4 million people watched."
+    },
+    {
+      "post_num": 500,
+      "id": "7610986343606390029",
+      "label": "Hannah Montana deportation",
+      "date": "2026-02-26",
+      "views": 8800000,
+      "caption": "Here illegally? You can always find your way back home!",
+      "note": "Hannah Montana was used twice to advertise the government's deportation app.",
+      "related_id": "7620999371991108877"
+    }
+  ],
+  "expletive_lineage": [
+    {
+      "post_num": 7,
+      "id": "7540745321232567566",
+      "label": "All we do is win",
+      "date": "2025-08-20",
+      "views": 1000000,
+      "caption": "All we do is win",
+      "note": "Expletives appeared from the account's first week, borrowed from movie clips.",
+      "related_id": "7545165161884028174"
+    },
+    {
+      "post_num": 96,
+      "id": "7550419008806194487",
+      "label": "FAFO (early)",
+      "date": "2025-09-15",
+      "views": 379100,
+      "caption": "FAFO. ",
+      "note": "The account then began using profanity as its own voice. 'F--- around and find out' was abbreviated to four letters over footage of the Venezuela military operation."
+    },
+    {
+      "post_num": 371,
+      "id": "7591235697151855886",
+      "label": "FAFO (80.7M)",
+      "date": "2026-01-03",
+      "views": 80700000,
+      "caption": "FAFO. ",
+      "note": "The same acronym returned four months later over Venezuelan president Nicol\u00e1s Maduro's capture, and it became the account's most-watched post by a mile, with over 80 million views."
+    },
+    {
+      "post_num": 205,
+      "id": "7562259783189875981",
+      "label": "Trump uncensored",
+      "date": "2025-10-17",
+      "views": 1000000,
+      "caption": "FAFO. ",
+      "note": "The coded language wasn't always coded. Four times, the profanities came from the president himself, unbleeped.",
+      "related_ids": ["7563107264618302775", "7589663943942081805", "7615311745476857101"]
+    },
+    {
+      "post_num": 406,
+      "id": "7597107880822689038",
+      "label": "FUCK IT",
+      "date": "2026-01-19",
+      "views": 793000,
+      "caption": "Everybody wants the view but no one wants the climb. ",
+      "note": "It wasn't just speech. Once, 'F--- IT' appeared as visible text on screen, fully uncensored."
+    },
+    {
+      "post_num": 96,
+      "id": "7550419008806194487",
+      "label": "Scrubbed for Instagram",
+      "date": "2025-09-15",
+      "views": 379100,
+      "caption": "FAFO. ",
+      "note": "In the three instances the account sanitised its content for Instagram, two had their FAFO captions removed. The third, set to 50 Cent's 'Many Men,' had the n-word in the lyrics censored.",
+      "related_ids": ["7591235697151855886", "7584530763320708365"]
+    },
+    {
+      "post_num": 562,
+      "id": "7618668141467536653",
+      "label": "$10.5 TRILLION",
+      "date": "2026-03-18",
+      "views": 2900000,
+      "caption": "$10.5 TRILLION IN 1 YEAR \ud83e\udd11",
+      "note": "The last expletive observed used a Wolf of Wall Street clip with the text overlay: '22 Million dollars in three Fu*king hours.' It was not posted on Instagram."
+    }
+  ],
+  "profanity_sources": [
+    { "label": "Trump direct speech", "count": 4, "color": "#ef4444" },
+    { "label": "Meme clips", "count": 8, "color": "#60a5fa" },
+    { "label": "Rap", "count": 7, "color": "#34d399" },
+    { "label": "Other", "count": 4, "color": "#666" },
+    { "label": "AI-generated", "count": 2, "color": "#a855f7" },
+    { "label": "JD Vance", "count": 1, "color": "#fb923c" },
+    { "label": "Pete Hegseth", "count": 1, "color": "#fb923c" },
+    { "label": "Pitbull", "count": 1, "color": "#34d399" }
+  ],
+  "framing": "These are some of the posts that trace a path to STRIKE \u2014 not an exhaustive list, but a selection that illustrates how the format, tone, and audience were built up over months before being applied to war."
+}
