@@ -159,8 +159,9 @@ const VizStrike = (() => {
                     { label: "s---", count: 1 }
                 ];
 
-                const cellSize = 36;
-                const cellGap = 5;
+                const isMob = window.innerWidth <= 700;
+                const cellSize = isMob ? 28 : 36;
+                const cellGap = isMob ? 3 : 5;
                 const cols = 7;
 
                 // Build waffle with annotations
@@ -174,6 +175,29 @@ const VizStrike = (() => {
                 // remaining 3 are orange
 
                 const gridW = cols * cellSize + (cols - 1) * cellGap;
+                const annStyle = "font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;line-height:1.5;";
+                const sideAnnotations = `
+                        <div style="position:absolute;top:0;left:-10px;transform:translateX(-100%);${annStyle}color:#94a3b8;text-align:left;">
+                            Absent from<br>Instagram
+                        </div>
+                        <div style="position:absolute;bottom:${cellSize + cellGap + 10}px;right:-10px;transform:translateX(100%);${annStyle}color:#22c55e;text-align:left;">
+                            Posted as-is
+                        </div>
+                        <div style="position:absolute;bottom:0;right:-10px;transform:translateX(100%);${annStyle}color:#38bdf8;text-align:left;">
+                            Scrubbed of<br>profanities
+                        </div>`;
+                const legendBelow = `
+                    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:12px;">
+                        <div style="${annStyle}color:#94a3b8;font-size:0.75rem;display:flex;align-items:center;gap:5px;">
+                            <div style="width:12px;height:12px;background:#94a3b8;border-radius:2px;"></div> Absent from Instagram
+                        </div>
+                        <div style="${annStyle}color:#22c55e;font-size:0.75rem;display:flex;align-items:center;gap:5px;">
+                            <div style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></div> Posted as-is
+                        </div>
+                        <div style="${annStyle}color:#38bdf8;font-size:0.75rem;display:flex;align-items:center;gap:5px;">
+                            <div style="width:12px;height:12px;background:#38bdf8;border-radius:2px;"></div> Scrubbed
+                        </div>
+                    </div>`;
                 linCard.innerHTML = `
                     <div class="lin-ann" style="margin:0 0 20px 0;text-align:center;max-width:500px;">
                         <div class="lin-ann-note">Of the 35 posts that contained profanities, 24 were absent from the White House's Instagram. The eight posted as-is were all bleeped, hidden behind acronyms, or used milder language like "bulls---" and "s---."</div>
@@ -182,16 +206,9 @@ const VizStrike = (() => {
                         <div style="display:grid;grid-template-columns:repeat(${cols},${cellSize}px);gap:${cellGap}px;">
                             ${cells.map(c => `<div style="width:${cellSize}px;height:${cellSize}px;background:${c};"></div>`).join("")}
                         </div>
-                        <div style="position:absolute;top:0;left:-10px;transform:translateX(-100%);font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;color:#94a3b8;line-height:1.5;text-align:left;">
-                            Absent from<br>Instagram
-                        </div>
-                        <div style="position:absolute;bottom:${cellSize + cellGap + 10}px;right:-10px;transform:translateX(100%);font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;color:#22c55e;line-height:1.5;text-align:left;">
-                            Posted as-is
-                        </div>
-                        <div style="position:absolute;bottom:0;right:-10px;transform:translateX(100%);font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;color:#38bdf8;line-height:1.5;text-align:left;">
-                            Scrubbed of<br>profanities
-                        </div>
-                    </div>`;
+                        ${isMob ? '' : sideAnnotations}
+                    </div>
+                    ${isMob ? legendBelow : ''}`;
                 linCard.style.opacity = "1";
                 buildProfanityTimeline();
             }, 80);

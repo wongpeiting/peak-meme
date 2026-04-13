@@ -3,7 +3,7 @@ gsap.registerPlugin(ScrollTrigger);
 // ─── Config ───
 const IS_MOBILE = window.innerWidth < 768;
 const ZOOM_SCALE = IS_MOBILE ? 50 : 80;
-const SCROLL_DISTANCE = IS_MOBILE ? 400 : 500;
+const SCROLL_DISTANCE = IS_MOBILE ? Math.max(300, window.innerHeight * 0.5) : 500;
 
 // ═══════════════════════════════════════════════════
 // OPENING — zoom into the dog's eye in panel 1
@@ -59,7 +59,7 @@ openTl
                 overlay.style.top = "auto";
                 overlay.style.bottom = "5%";
                 overlay.style.transform = "none";
-                overlay.style.width = "35vw";
+                overlay.style.width = "clamp(130px, 40vw, 200px)";
             } else {
                 overlay.style.top = "50%";
                 overlay.style.bottom = "auto";

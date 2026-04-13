@@ -173,30 +173,32 @@
 
             // ── Text steps with videos ──
             case "text-2":
+                // Mobile: accumulate — Lizard appears bottom-left
+                if (isMobile) {
+                    showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");
+                    audioBtn.classList.add("visible");
+                    break;
+                }
                 // Desktop: Lizard left, Stay Frosty right
-                // Mobile: Lizard bottom-left, Stay Frosty top-right (accumulate)
                 showLizardFullscreen();
-                setQ(vidOverlay, "q-bl");
                 if (!vidEl2.src.includes("7613501531765116191")) {
                     vidEl2.src = "videos/7613501531765116191.mp4";
                     vidEl2.load();
                 }
                 vidEl2.muted = !window.audioEnabled;
                 vidOverlay2.classList.add("active");
-                setQ(vidOverlay2, "q-tr");
                 vidEl2.play().catch(() => {});
                 break;
 
             case "text-3":
-                // Desktop: HOME RUN left, Stay Frosty right
-                // Mobile: keep Lizard + Stay Frosty, add HOME RUN top-left
+                // Mobile: accumulate — Stay Frosty appears top-right
                 if (isMobile) {
-                    showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");   // Lizard stays
-                    showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");  // Stay Frosty stays
-                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-tl");  // HOME RUN new
+                    showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");
+                    showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");
                     audioBtn.classList.add("visible");
                     break;
                 }
+                // Desktop: HOME RUN left, Stay Frosty right
                 vidOverlay.style.position = "fixed";
                 vidOverlay.style.top = "50%";
                 vidOverlay.style.left = "5%";
@@ -213,7 +215,6 @@
                 vidCaption.textContent = "";
                 vidEl.play().catch(() => {});
                 audioBtn.classList.add("visible");
-                // Stay Frosty on the right
                 if (!vidEl2.src.includes("7613501531765116191")) {
                     vidEl2.src = "videos/7613501531765116191.mp4";
                     vidEl2.load();
@@ -224,16 +225,15 @@
                 break;
 
             case "text-4":
-                // Desktop: HOME RUN left, Spongebob right
-                // Mobile: all 4 quadrants filled
+                // Mobile: accumulate — HOME RUN appears bottom-right
                 if (isMobile) {
-                    showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");    // Lizard
-                    showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");   // Stay Frosty
-                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-tl");   // HOME RUN
-                    showMobileVid(vidOverlay4, vidEl4, "7613864676010511629", "q-br");   // Spongebob
+                    showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");
+                    showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");
+                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-br");
                     audioBtn.classList.add("visible");
                     break;
                 }
+                // Desktop: HOME RUN left, Spongebob right
                 vidOverlay.style.position = "fixed";
                 vidOverlay.style.top = "50%";
                 vidOverlay.style.left = "5%";
@@ -260,13 +260,12 @@
                 break;
 
             case "text-5":
-                // Desktop: STRIKE left, Spongebob right
-                // Mobile: keep all 4 (STRIKE replaces Lizard in bottom-left)
+                // Mobile: accumulate — Spongebob appears top-left (all 4 now on screen)
                 if (isMobile) {
-                    showMobileVid(vidOverlay, vidEl, "7616166285625347342", "q-bl");    // STRIKE replaces Lizard
-                    showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");   // Stay Frosty
-                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-tl");   // HOME RUN
-                    showMobileVid(vidOverlay4, vidEl4, "7613864676010511629", "q-br");   // Spongebob
+                    showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");
+                    showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");
+                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-br");
+                    showMobileVid(vidOverlay4, vidEl4, "7613864676010511629", "q-tl");
                     audioBtn.classList.add("visible");
                     break;
                 }
@@ -452,8 +451,9 @@
                 break;
         }
 
-        // Update nav arrows
+        // Update nav arrows + progress indicator
         updateNavVisibility();
+        updateLinProgress();
 
         // Re-enable CSS transitions on next paint
         requestAnimationFrame(() => _vizContainer.classList.remove("notransition"));
@@ -510,6 +510,48 @@
             window.stepNav(-1);
         }
     });
+
+    // ─── Mobile: lineage progress indicator ───
+    const linSections = [
+        { label: "Overview", states: ["lin-0"] },
+        { label: "Produced", states: ["lin-prod-0","lin-prod-1","lin-prod-2","lin-prod-grid"] },
+        { label: "Troll", states: ["lin-troll-intro","lin-troll-0","lin-troll-1","lin-troll-2","lin-troll-3","lin-troll-4","lin-troll-5"] },
+        { label: "Explicit", states: ["lin-exp-intro","lin-exp-0","lin-exp-1","lin-exp-2","lin-exp-3","lin-exp-4","lin-exp-5","lin-exp-6"] },
+        { label: "Gaming", states: ["lin-game-intro","lin-game-opponents","lin-game-0","lin-game-1","lin-game-2","lin-game-3"] },
+        { label: "Profanity", states: ["profanity-sources","profanity"] },
+    ];
+
+    if (isMobile) {
+        const prog = document.createElement("div");
+        prog.id = "lin-progress";
+        prog.innerHTML = `
+            <div class="lp-dots">${linSections.map(() => '<span class="lp-dot"></span>').join("")}</div>
+            <div class="lp-label"></div>`;
+        _vizContainer.appendChild(prog);
+    }
+
+    function updateLinProgress() {
+        const prog = document.getElementById("lin-progress");
+        if (!prog) return;
+        const dots = prog.querySelectorAll(".lp-dot");
+        const label = prog.querySelector(".lp-label");
+        let found = false;
+
+        for (let i = 0; i < linSections.length; i++) {
+            const sec = linSections[i];
+            const idx = sec.states.indexOf(currentState);
+            dots[i].classList.remove("active", "past");
+            if (idx >= 0) {
+                dots[i].classList.add("active");
+                label.textContent = `${sec.label} · ${idx + 1} / ${sec.states.length}`;
+                found = true;
+                // Mark previous sections as past
+                for (let j = 0; j < i; j++) dots[j].classList.add("past");
+            }
+        }
+        prog.classList.toggle("visible", found);
+    }
+
 
 
     // ─── Resize ───

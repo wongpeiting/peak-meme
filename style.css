@@ -29,7 +29,7 @@ body {
 /* ─── Audio button ─── */
 
 .audio-btn {
-    position: fixed; top: 1rem; right: 1rem; z-index: 200;
+    position: fixed; top: max(1rem, env(safe-area-inset-top, 0px)); right: max(1rem, env(safe-area-inset-right, 0px)); z-index: 200;
     opacity: 0; pointer-events: none;
     display: flex; align-items: center; gap: 0.4rem;
     background: rgba(0,0,0,0.3);
@@ -341,7 +341,7 @@ body {
 }
 .lin-mini-grid .lin-vid-footer { display: none; }
 @media (max-width: 700px) {
-    .lin-mini-grid { grid-template-columns: repeat(4, 1fr); max-width: 50vw; gap: 3px; }
+    .lin-mini-grid { grid-template-columns: repeat(4, 1fr); max-width: 65vw; gap: 3px; }
     .lin-mini-grid .lin-vid { border-radius: 2px !important; }
 }
 
@@ -455,10 +455,10 @@ body {
 .lc-tag { font-size: 0.45rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 4px 0; }
 
 @media (max-width: 700px) {
-    #lin-card { flex-direction: column !important; gap: 12px !important; text-align: center; top: 60% !important; align-items: center !important; }
+    #lin-card { flex-direction: column !important; gap: 20px !important; text-align: center; top: 50% !important; align-items: center !important; max-height: 88dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     #lin-focus .lin-vid { width: min(160px, 42vw); }
     #lin-focus .lin-ann { max-width: 82vw; margin-left: 0; width: 82vw; padding: 0 4vw; }
-    #lin-focus .lin-ann-note { font-size: 0.9rem; line-height: 1.5; }
+    #lin-focus .lin-ann-note { font-size: 1.15rem; line-height: 1.6; }
     #lin-focus .lin-pair { justify-content: center; }
     #lin-focus .lin-pair.lin-pair--sm {
         display: flex !important;
@@ -476,9 +476,44 @@ body {
         width: calc(33.3% - 4px) !important; border-radius: 6px !important;
     }
     #lin-focus .lin-pair + .lin-ann { max-width: 90vw; }
+    #step-nav {
+        bottom: 12px; right: auto; left: 50%; transform: translateX(-50%);
+    }
+    #step-nav button { font-size: 1.5rem; padding: 8px 14px; color: #888; }
+    .nav-hint { font-size: 0.65rem; }
+    /* Hide timeline bar and profanity legend on mobile — waffle + text carry the story */
+    #lin-timeline { display: none !important; }
+    .lt-legend { display: none !important; }
+    /* Mobile lineage progress indicator — vertical left */
+    #lin-progress {
+        position: absolute;
+        top: 50%; left: max(10px, env(safe-area-inset-left, 0px));
+        transform: translateY(-50%);
+        z-index: 40;
+        display: flex; align-items: center; gap: 8px;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.3s;
+    }
+    #lin-progress.visible { opacity: 1; }
+    .lp-dots { display: flex; flex-direction: column; gap: 8px; }
+    .lp-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #333; transition: background 0.3s, transform 0.3s;
+    }
+    .lp-dot.active { background: #fff; transform: scale(1.4); }
+    .lp-dot.past { background: #555; }
+    .lp-label {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.5rem; font-weight: 600;
+        letter-spacing: 0.1em; text-transform: uppercase;
+        color: #666;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+    /* Hide swipe nav on mobile — scroll drives navigation */
     #step-nav { display: none !important; }
     .emoji-bar { font-size: 0.9rem !important; letter-spacing: 1px !important; }
-    .waffle-wrap { transform: scale(0.65); transform-origin: top center; }
+    .waffle-wrap { max-width: 90vw; margin: 0 auto; }
     .pkg-chart-inner { display: none !important; }
     #pkg-chart-mobile { display: flex !important; }
     .step-card--dramatic { max-width: 85vw !important; padding: 24px 20px !important; }
@@ -490,6 +525,7 @@ body {
     position: relative;
     background: var(--c-bg);
     color: var(--c-text);
+    overflow-x: clip;
 }
 
 /* ─── Sticky viz container ─── */
@@ -752,6 +788,9 @@ body {
     border-radius: 0;
     width: 100vw;
     max-width: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .step-card--headline h1 {
     font-family: 'Space Grotesk', sans-serif;
@@ -970,14 +1009,14 @@ body {
     #video-overlay-3,
     #video-overlay-4 {
         transform: none !important;
-        width: 35vw !important;
+        width: clamp(130px, 40vw, 200px) !important;
     }
 
     /* Quadrant positions for mobile */
-    .q-bl { left: 5% !important; right: auto !important; top: auto !important; bottom: 5% !important; }
-    .q-tr { right: 5% !important; left: auto !important; top: 8% !important; bottom: auto !important; }
-    .q-tl { left: 5% !important; right: auto !important; top: 8% !important; bottom: auto !important; }
-    .q-br { right: 5% !important; left: auto !important; top: auto !important; bottom: 5% !important; }
+    .q-bl { left: max(5%, env(safe-area-inset-left, 0px)) !important; right: auto !important; top: auto !important; bottom: max(5%, env(safe-area-inset-bottom, 0px)) !important; }
+    .q-tr { right: max(5%, env(safe-area-inset-right, 0px)) !important; left: auto !important; top: max(8%, env(safe-area-inset-top, 0px)) !important; bottom: auto !important; }
+    .q-tl { left: max(5%, env(safe-area-inset-left, 0px)) !important; right: auto !important; top: max(8%, env(safe-area-inset-top, 0px)) !important; bottom: auto !important; }
+    .q-br { right: max(5%, env(safe-area-inset-right, 0px)) !important; left: auto !important; top: auto !important; bottom: max(5%, env(safe-area-inset-bottom, 0px)) !important; }
 
     .eye-text {
         top: 70% !important;
@@ -990,11 +1029,6 @@ body {
 
     .step-card--headline {
         padding: 2.5rem 1.5rem;
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-left: 0;
     }
 
     #comparison-panel {
@@ -1007,4 +1041,29 @@ body {
     #comp-arrow {
         transform: rotate(90deg);
     }
+}
+
+/* ─── Extra-small phones (iPhone SE, Galaxy S) ─── */
+@media (max-width: 389px) {
+    .step-card { padding: 16px 18px; }
+    .step-card--dramatic { padding: 20px 16px !important; }
+    .eye-text { max-width: 88vw; }
+    .intro-text { max-width: 92vw; }
+    .content-warning { max-width: 92vw; }
+}
+
+/* ─── Landscape phones — prevent video height overflow ─── */
+@media (orientation: landscape) and (max-height: 500px) {
+    #video-overlay,
+    #video-overlay-2,
+    #video-overlay-3,
+    #video-overlay-4 {
+        width: min(120px, 20vw) !important;
+    }
+    .q-bl, .q-br { bottom: 3% !important; }
+    .q-tl, .q-tr { top: 3% !important; }
+    #lin-focus .lin-vid { width: min(100px, 18vh) !important; }
+    .wh-video-phone { width: min(150px, 25vh) !important; }
+    .step-card--dramatic { max-width: 70vw !important; padding: 16px !important; }
+    .step-card--headline { padding: 1.5rem 1rem !important; }
 }
