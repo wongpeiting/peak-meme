@@ -401,41 +401,41 @@
                         { l: 2, label: "Direct address", avg: 2.1 },
                         { l: 1, label: "Official", avg: 1.3 }
                     ];
-                    pkgChart.innerHTML = `<div class="pkg-chart-inner" style="display:flex;gap:8px;">
-                        <div style="display:flex;flex-direction:column;align-items:center;padding:0;width:18px;">
-                            <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid #aaa;"></div>
+                    pkgChart.innerHTML = `<div class="pkg-chart-inner" style="display:flex;gap:10px;">
+                        <div style="display:flex;flex-direction:column;align-items:center;padding:0;width:20px;">
+                            <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:11px solid #aaa;"></div>
                             <div style="width:2px;flex:1;background:#aaa;"></div>
-                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.55rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Level of escalation</div>
+                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.65rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Level of escalation</div>
                         </div>
-                        <div style="flex:1;display:flex;flex-direction:column;gap:8px;">` +
+                        <div style="flex:1;display:flex;flex-direction:column;gap:10px;">` +
                     levels.map(lv => {
                         const pct = (lv.avg / 5.9 * 100).toFixed(0);
                         const barColor = lv.l >= 5 ? "#ff3b3b" : "#555";
-                        return `<div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:90px;text-align:right;font-size:0.75rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;white-space:nowrap;">${lv.label}</div>
-                            <div style="display:flex;align-items:center;height:26px;">
+                        return `<div style="display:flex;align-items:center;gap:10px;">
+                            <div style="width:110px;text-align:right;font-size:0.9rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;white-space:nowrap;">${lv.label}</div>
+                            <div style="display:flex;align-items:center;height:30px;">
                                 <div style="width:${pct * 2.5}px;height:100%;background:${barColor};"></div>
-                                <div style="font-size:0.7rem;color:#fff;font-family:Inter,sans-serif;font-weight:700;margin-left:6px;">${lv.avg}M</div>
+                                <div style="font-size:0.8rem;color:#fff;font-family:Inter,sans-serif;font-weight:700;margin-left:8px;">${lv.avg}M</div>
                             </div>
                         </div>`;
                     }).join("") + `</div></div>`;
                     // Mobile-friendly version
                     const mobileChart = document.createElement("div");
                     mobileChart.id = "pkg-chart-mobile";
-                    mobileChart.innerHTML = `<div style="display:flex;gap:4px;">
-                        <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;">
-                            <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid #aaa;"></div>
+                    mobileChart.innerHTML = `<div style="display:flex;gap:6px;">
+                        <div style="display:flex;flex-direction:column;align-items:center;width:16px;flex-shrink:0;">
+                            <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:9px solid #aaa;"></div>
                             <div style="width:1.5px;flex:1;background:#aaa;"></div>
-                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.4rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Level of escalation</div>
+                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.55rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Level of escalation</div>
                         </div>
-                        <div style="flex:1;display:flex;flex-direction:column;gap:6px;">` +
+                        <div style="flex:1;display:flex;flex-direction:column;gap:8px;">` +
                     levels.map(lv => {
                         const pct = (lv.avg / 5.9 * 100).toFixed(0);
                         const barColor = lv.l >= 5 ? "#ff3b3b" : "#555";
-                        return `<div style="display:flex;align-items:center;gap:6px;">
-                            <div style="width:70px;text-align:right;font-size:0.55rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;white-space:nowrap;">${lv.label}</div>
-                            <div style="width:${pct}%;height:18px;background:${barColor};display:flex;align-items:center;justify-content:flex-end;padding-right:4px;min-width:30px;">
-                                <span style="font-size:0.5rem;color:#fff;font-family:Inter,sans-serif;font-weight:600;">${lv.avg}M</span>
+                        return `<div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;text-align:right;font-size:0.7rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;white-space:nowrap;">${lv.label}</div>
+                            <div style="width:${pct}%;height:22px;background:${barColor};display:flex;align-items:center;justify-content:flex-end;padding-right:5px;min-width:35px;">
+                                <span style="font-size:0.65rem;color:#fff;font-family:Inter,sans-serif;font-weight:700;">${lv.avg}M</span>
                             </div>
                         </div>`;
                     }).join("") + `</div></div>`;
@@ -454,6 +454,9 @@
         // Update nav arrows + progress indicator
         updateNavVisibility();
         updateLinProgress();
+
+        // Auto-shrink lineage text to fit mobile viewport (no scrollbars)
+        if (isMobile) fitLinCard();
 
         // Re-enable CSS transitions on next paint
         requestAnimationFrame(() => _vizContainer.classList.remove("notransition"));
@@ -553,6 +556,27 @@
     }
 
 
+
+    // ─── Auto-shrink lineage text to fit viewport ───
+    function fitLinCard() {
+        const card = document.getElementById("lin-card");
+        if (!card) return;
+        const note = card.querySelector(".lin-ann-note");
+        if (!note) return;
+        // Reset to default size first
+        note.style.fontSize = "";
+        // Wait for layout to settle, then check overflow
+        requestAnimationFrame(() => {
+            let size = parseFloat(getComputedStyle(note).fontSize);
+            const minSize = 12; // never go below 12px
+            let tries = 0;
+            while (card.scrollHeight > card.clientHeight && size > minSize && tries < 10) {
+                size -= 1;
+                note.style.fontSize = size + "px";
+                tries++;
+            }
+        });
+    }
 
     // ─── Resize ───
     let resizeTimer;

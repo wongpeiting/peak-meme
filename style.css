@@ -455,7 +455,7 @@ body {
 .lc-tag { font-size: 0.45rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 4px 0; }
 
 @media (max-width: 700px) {
-    #lin-card { flex-direction: column !important; gap: 20px !important; text-align: center; top: 50% !important; align-items: center !important; max-height: 88dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    #lin-card { flex-direction: column !important; gap: 20px !important; text-align: center; top: 50% !important; align-items: center !important; max-height: 88dvh; overflow: hidden; }
     #lin-focus .lin-vid { width: min(160px, 42vw); }
     #lin-focus .lin-ann { max-width: 82vw; margin-left: 0; width: 82vw; padding: 0 4vw; }
     #lin-focus .lin-ann-note { font-size: 1.15rem; line-height: 1.6; }
@@ -517,6 +517,7 @@ body {
     .pkg-chart-inner { display: none !important; }
     #pkg-chart-mobile { display: flex !important; }
     .step-card--dramatic { max-width: 85vw !important; padding: 24px 20px !important; }
+    [data-state="grid-final"] .step-card { padding-top: 48px !important; }
 }
 
 /* ─── Article section ─── */
