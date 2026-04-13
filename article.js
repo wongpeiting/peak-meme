@@ -516,12 +516,10 @@
 
     // ─── Mobile: lineage progress indicator ───
     const linSections = [
-        { label: "Overview", states: ["lin-0"] },
-        { label: "Produced", states: ["lin-prod-0","lin-prod-1","lin-prod-2","lin-prod-grid"] },
+        { label: "Produced", states: ["lin-0","lin-prod-0","lin-prod-1","lin-prod-2","lin-prod-grid"] },
+        { label: "Gaming", states: ["lin-game-intro","lin-game-0","lin-game-1","lin-game-opponents","lin-game-2","lin-game-3"] },
         { label: "Troll", states: ["lin-troll-intro","lin-troll-0","lin-troll-1","lin-troll-2","lin-troll-3","lin-troll-4","lin-troll-5"] },
-        { label: "Explicit", states: ["lin-exp-intro","lin-exp-0","lin-exp-1","lin-exp-2","lin-exp-3","lin-exp-4","lin-exp-5","lin-exp-6"] },
-        { label: "Gaming", states: ["lin-game-intro","lin-game-opponents","lin-game-0","lin-game-1","lin-game-2","lin-game-3"] },
-        { label: "Profanity", states: ["profanity-sources","profanity"] },
+        { label: "Explicit", states: ["lin-exp-intro","lin-exp-0","lin-exp-1","lin-exp-2","lin-exp-3","lin-exp-4","profanity-sources","profanity","lin-exp-5","lin-exp-6"] },
     ];
 
     if (isMobile) {
