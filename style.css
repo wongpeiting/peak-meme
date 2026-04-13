@@ -114,15 +114,22 @@ body {
     font-size: 0.85rem;
     color: #888;
     text-align: center;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
 }
 
 .outro-text a {
-    color: #888;
+    color: #4a7abf;
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color 0.2s;
+}
+.outro-game a { text-decoration: none; color: #6ba3ff; text-transform: uppercase; letter-spacing: 0.08em; font-size: 1.1rem; }
+.waving-text span {
+    display: inline-block;
+    animation: wave 1.2s ease-in-out infinite;
+}
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
 }
 .outro-text a:hover { color: #111; }
 
@@ -134,7 +141,7 @@ body {
     margin-top: 0.5rem;
 }
 .outro-author a {
-    color: #aaa;
+    color: #4a7abf;
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color 0.2s;
