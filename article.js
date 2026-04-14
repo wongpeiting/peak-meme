@@ -384,7 +384,7 @@
 
             case "grid-return":
                 VizGrid.show();
-                VizGrid.highlight("all-final");
+                VizGrid.highlight("intro");
                 break;
 
             case "grid-final": {
@@ -445,9 +445,24 @@
                 break;
             }
 
+            case "blind-spot-intro":
+                VizGrid.show();
+                VizGrid.highlight("intro");
+                break;
+
+            case "blind-spot-flagged":
+                VizGrid.show();
+                VizGrid.highlight("blind-spot-flagged");
+                break;
+
+            case "blind-spot-unflagged":
+                VizGrid.show();
+                VizGrid.highlight("blind-spot-unflagged");
+                break;
+
             case "kicker":
                 VizGrid.show();
-                VizGrid.highlight("all-final");
+                VizGrid.highlight("blind-spot-unflagged");
                 break;
         }
 

@@ -111,7 +111,7 @@ body {
 
 .outro-text {
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #888;
     text-align: center;
 }
@@ -132,6 +132,7 @@ body {
     50% { transform: translateY(-4px); }
 }
 .outro-text a:hover { color: #111; }
+.outro-links { display: flex; flex-direction: column; gap: 0.4rem; }
 
 .outro-author {
     font-family: 'Inter', sans-serif;

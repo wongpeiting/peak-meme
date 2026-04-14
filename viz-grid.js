@@ -200,8 +200,23 @@ const VizGrid = (() => {
 
                 case "all-final":
                     c.classList.add("on");
-                    if (p.packaging_level >= 5) c.classList.add("wh-highlight-red");
+                    if (WAR_MEME_12.has(i)) c.classList.add("wh-shaded", "wh-highlight-red");
+                    else if (p.packaging_level >= 5) c.classList.add("wh-highlight-red");
                     else c.classList.add("wh-dim");
+                    break;
+
+                case "blind-spot-flagged": {
+                    const FLAGGED_5 = new Set([95, 173, 378, 421, 422]);
+                    c.classList.add("on");
+                    if (FLAGGED_5.has(i)) c.classList.add("wh-highlight");
+                    else c.style.opacity = "0.15";
+                    break;
+                }
+
+                case "blind-spot-unflagged":
+                    c.classList.add("on");
+                    if (WAR_MEME_12.has(i)) c.classList.add("wh-shaded");
+                    else c.style.opacity = "0.15";
                     break;
 
                 default:

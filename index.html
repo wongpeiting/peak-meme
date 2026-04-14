@@ -130,6 +130,13 @@
                 </div>
             </div>
 
+            <div class="a-step" data-state="grid-final">
+                <div class="step-card step-card--center step-card--dramatic" style="max-width:560px;">
+                    <p style="font-size:clamp(1.2rem,4vw,1.5rem);line-height:1.6;">The algorithm rewarded every level of escalation. The higher the packaging level, the more views each post averaged.</p>
+                    <div id="pkg-chart" style="margin-top:32px;margin-bottom:24px;display:flex;flex-direction:column;gap:6px;"></div>
+                </div>
+            </div>
+
             <div class="a-step" data-state="headline" style="padding:0;">
                 <div class="step-card step-card--headline">
                     <h1>HOW THE WHITE HOUSE<br>HIT PEAK MEME</h1>
@@ -196,17 +203,29 @@
 
             <div class="a-step a-step--short" data-state="grid-return"></div>
 
-            <div class="a-step" data-state="grid-final">
+            <div class="a-step" data-state="blind-spot-intro">
                 <div class="step-card step-card--center step-card--dramatic" style="max-width:560px;">
-                    <p style="font-size:clamp(1.2rem,4vw,1.5rem);line-height:1.6;">The algorithm rewarded every level of escalation. The higher the packaging level, the more views each post averaged.</p>
-                    <div id="pkg-chart" style="margin-top:32px;margin-bottom:24px;display:flex;flex-direction:column;gap:6px;"></div>
+                    <p>TikTok says its Restricted Mode filters out "realistic violence," "firearms in an inappropriate environment," and "explicit references to real-world events intended for older audiences."</p>
                 </div>
             </div>
 
-            <div class="a-step a-step--tall" data-state="kicker" style="padding:0;">
-                <div class="step-card step-card--headline" style="padding:3rem 2rem;">
-                    <p style="font-size:clamp(1.3rem,4vw,1.5rem);">The White House gamed TikTok, TikTok built algorithms to keep us watching, and we kept watching.</p>
-                    <p class="step-accent" style="margin-top:1.5rem;font-size:clamp(1.1rem,3.5vw,1.3rem);">The dog never left the room. Neither did we.</p>
+            <div class="a-step" data-state="blind-spot-flagged">
+                <div class="step-card step-card--center step-card--dramatic" style="max-width:560px;">
+                    <p>Out of 600 posts, TikTok blocked five from viewers who hadn't verified their age. These posts include ones that contained profanity, showed a person being struck, and depicted U.S. military strike footage.</p>
+                </div>
+            </div>
+
+            <div class="a-step" data-state="blind-spot-unflagged">
+                <div class="step-card step-card--center step-card--dramatic" style="max-width:560px;">
+                    <p>The 12 posts that repackaged real airstrike footage as internet entertainment — using video game overlays, sports animations, and meme formats — were not blocked.</p>
+                    <p style="margin-top:1em;">Children could see every one of them.</p>
+                </div>
+            </div>
+
+            <div class="a-step a-step--tall" data-state="kicker">
+                <div class="step-card step-card--center step-card--dramatic" style="max-width:560px;">
+                    <p>The White House gamed TikTok, TikTok built algorithms to keep us watching, and we kept watching.</p>
+                    <p class="step-accent" style="margin-top:1em;">The dog never left the room.<br>Neither did we.</p>
                 </div>
             </div>
 
@@ -221,8 +240,10 @@
         <div class="scene-inner">
             <img src="images/2-this-is-fine.png" id="meme-close" class="meme-img"
                  alt="This Is Fine dog saying This Is Fine">
-            <p class="outro-text"><a href="https://github.com/wongpeiting/peak-meme/" target="_blank" rel="noopener">Data and Methodology</a></p>
-            <p class="outro-text outro-game"><a href="https://wongpeiting.github.io/meme-game/" target="_blank" rel="noopener">🔥 <span class="waving-text"></span> 🔥</a></p>
+            <div class="outro-links">
+                <p class="outro-text"><a href="https://github.com/wongpeiting/peak-meme/" target="_blank" rel="noopener">Data and methodology</a></p>
+                <p class="outro-text"><a href="https://wongpeiting.github.io/meme-game/" target="_blank" rel="noopener">Role-play as a social media coordinator</a></p>
+            </div>
             <p class="outro-author"><a href="https://wongpeiting.github.io/" target="_blank" rel="noopener">About the author</a></p>
         </div>
         <div class="black-overlay" id="overlay-out"></div>
@@ -235,13 +256,5 @@
     <script src="viz-grid.js"></script>
     <script src="viz-strike.js"></script>
     <script src="article.js"></script>
-    <script>
-    document.querySelectorAll(".waving-text").forEach(el => {
-        const text = "Wanna play a game?";
-        el.innerHTML = text.split("").map((ch, i) =>
-            ch === " " ? " " : `<span style="animation-delay:${i * 0.06}s">${ch}</span>`
-        ).join("");
-    });
-    </script>
 </body>
 </html>
