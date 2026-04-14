@@ -306,12 +306,12 @@
                 if (prevState === "war-memes-all" || prevState === "grid-intro") {
                     // Scrolling back — show grid instantly with five highlights
                     VizGrid.show(false);
-                    VizGrid.zoomToPost(seenVideos);
+                    VizGrid.zoomToPost(seenVideos, null, true);
                 } else {
                     // Scrolling forward — cascade in
                     VizGrid.show(true);
                     setTimeout(() => {
-                        VizGrid.zoomToPost(seenVideos);
+                        VizGrid.zoomToPost(seenVideos, null, true);
                     }, 1800);
                 }
                 break;
@@ -333,7 +333,7 @@
                     537,  // Coming in hot (538/600)
                     543,  // UNDEFEATED (544/600)
                     544,  // STRIKE (545/600)
-                ]);
+                ], "wh-shaded");
                 break;
 
             case "broader-shift":
@@ -360,7 +360,7 @@
 
             case "lin-exp-intro":
                 VizGrid.show();
-                VizGrid.zoomToPost([6, 49, 95, 122, 133, 173, 204, 209, 210, 220, 224, 250, 321, 335, 357, 361, 362, 364, 370, 372, 374, 382, 383, 386, 405, 416, 420, 422, 438, 445, 473, 482, 525, 533, 561]);
+                VizGrid.zoomToPost([6, 49, 95, 122, 133, 173, 204, 209, 210, 220, 224, 250, 321, 335, 357, 361, 362, 364, 370, 372, 374, 382, 383, 386, 405, 416, 420, 422, 438, 445, 473, 482, 525, 533, 561], null, true);
                 break;
 
             case "lin-game-intro":

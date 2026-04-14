@@ -10,6 +10,9 @@ const VizGrid = (() => {
     let gridEl, videoBox, vid, vidCaption;
     let built = false;
 
+    // The 12 war meme posts — always shaded yellow once revealed
+    const WAR_MEME_12 = new Set([515, 517, 520, 521, 522, 525, 526, 527, 528, 537, 543, 544]);
+
     function init(svgEl) {
         // We don't use the SVG — we use #viz-grid div
         container = document.getElementById("viz-grid");
@@ -46,6 +49,8 @@ const VizGrid = (() => {
             "2026-04": "Apr",
         };
 
+        // Build grid in a document fragment to avoid 600 individual DOM insertions
+        const frag = document.createDocumentFragment();
         let currentMonth = null;
         posts.forEach((p, i) => {
             if (isMobile && p.month !== currentMonth) {
@@ -53,7 +58,7 @@ const VizGrid = (() => {
                 const label = document.createElement("div");
                 label.className = "wh-month-label";
                 label.textContent = monthLabels[p.month] || p.month;
-                gridEl.appendChild(label);
+                frag.appendChild(label);
             }
 
             const cell = document.createElement("div");
@@ -62,11 +67,12 @@ const VizGrid = (() => {
             if (p.thumb) {
                 const img = document.createElement("img");
                 img.src = p.thumb;
-                img.loading = i < 200 ? "eager" : "lazy";
+                img.loading = i < 60 ? "eager" : "lazy";
                 cell.appendChild(img);
             }
-            gridEl.appendChild(cell);
+            frag.appendChild(cell);
         });
+        gridEl.appendChild(frag);
 
         // Build timeline
         buildTimeline(monthLabels);
@@ -113,13 +119,11 @@ const VizGrid = (() => {
         // Always clear old state first
         cells.forEach(c => { c.className = "wh-cell"; c.style.opacity = ""; c.style.outline = ""; });
         if (cascade) {
-            // Cascade: cells appear one by one left-to-right
-            cells.forEach(c => { c.style.opacity = "0"; });
+            // Cascade: CSS animation instead of 600 setTimeouts
             cells.forEach((c, i) => {
-                setTimeout(() => {
-                    c.classList.add("on");
-                    c.style.opacity = "";
-                }, i * 2.5);
+                c.classList.add("on");
+                c.style.opacity = "0";
+                c.style.animation = `gridFadeIn 0.3s ease ${i * 2.5}ms forwards`;
             });
         } else {
             cells.forEach(c => c.classList.add("on"));
@@ -132,7 +136,7 @@ const VizGrid = (() => {
         container.style.zIndex = "";
         document.getElementById("viz-svg").style.display = "";
         if (gridEl) {
-            gridEl.querySelectorAll(".wh-cell").forEach(c => { c.className = "wh-cell"; c.style.opacity = ""; c.style.outline = ""; });
+            gridEl.querySelectorAll(".wh-cell").forEach(c => { c.className = "wh-cell"; c.style.opacity = ""; c.style.outline = ""; c.style.animation = ""; });
         }
     }
 
@@ -144,6 +148,7 @@ const VizGrid = (() => {
             c.className = "wh-cell";
             c.style.opacity = "";
             c.style.outline = "";
+            c.style.animation = "";
             const p = posts[i];
             if (!p) return;
 
@@ -159,7 +164,10 @@ const VizGrid = (() => {
 
                 case "memes":
                 case "meme-views":
-                    if (p.packaging_level >= 5) c.classList.add("on", "wh-highlight");
+                    if (p.packaging_level >= 5) {
+                        c.classList.add("on", "wh-highlight");
+                        if (WAR_MEME_12.has(i)) c.classList.add("wh-shaded");
+                    }
                     else c.classList.add("wh-dim");
                     break;
 
@@ -202,17 +210,23 @@ const VizGrid = (() => {
         });
     }
 
-    function zoomToPost(postIndices) {
+    function zoomToPost(postIndices, highlightClass, noShade) {
         if (!gridEl || !posts) return;
         const cells = gridEl.querySelectorAll(".wh-cell");
         const indices = Array.isArray(postIndices) ? new Set(postIndices) : new Set([postIndices]);
+        const cls = highlightClass || "wh-highlight";
 
         cells.forEach((c, i) => {
             c.className = "wh-cell";
             c.style.opacity = "";
             c.style.outline = "";
+            c.style.animation = "";
             if (indices.has(i)) {
-                c.classList.add("on", "wh-highlight");
+                c.classList.add("on", cls);
+                if (!noShade && WAR_MEME_12.has(i)) c.classList.add("wh-shaded");
+            } else if (!noShade && WAR_MEME_12.has(i)) {
+                c.classList.add("on", "wh-shaded");
+                c.style.opacity = "0.6";
             } else {
                 c.classList.add("on");
                 c.style.opacity = "0.4";
