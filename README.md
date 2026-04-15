@@ -4,7 +4,7 @@ Last month, the White House’s TikTok account began posting a series of meme-st
 
 So when the White House crossed 600 TikToks on April 1, I took it that it is time to scrape and classify the posts according to themes I was interested in, be they meme usage, gamification, profanity use, or hyper-masculinity and aura-farming tendencies – whatever caught my attention as I reviewed the videos one by one. I emerged from the process understanding a government's bid to steadily push the boundary between institutional communication and internet entertainment, and [this scrolly article was what came out of it](wongpeiting.github.io/peak-meme).
 
-Bonus companion game: Instead of reading the analysis, you can try your hand at role-playing as a social media coordinator for the White House – [Can You Run the White House TikTok?](https://wongpeiting.github.io/meme-game/)
+**Bonus companion game:** Instead of reading the analysis, you can try your hand at role-playing as a social media coordinator for the White House – [Can You Run the White House TikTok?](https://wongpeiting.github.io/meme-game/)
 
 ## How this was made
 
