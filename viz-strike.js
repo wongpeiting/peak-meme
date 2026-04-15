@@ -13,6 +13,43 @@ const VizStrike = (() => {
     let expletiveNodes = [];
     let expletivePosts = null;
 
+    // ─── Timeline reuse state (desktop smooth transitions) ───
+    let _curType = null;       // "war"|"game"|"troll"|"expletive"|"profanity"|null
+    let _curTrack = null;      // reference to live .lt-track element
+    let _curNodeMap = new Map(); // postId → DOM node element
+
+    function _updateActiveNode(activeIds) {
+        let activePcts = [];
+        _curNodeMap.forEach((domNode, postId) => {
+            const shouldBeActive = activeIds.has(postId);
+            if (shouldBeActive) {
+                domNode.classList.remove("visited");
+                domNode.classList.add("current");
+                const pct = parseFloat(domNode.style.getPropertyValue("--pct"));
+                if (!isNaN(pct)) activePcts.push(pct);
+            } else {
+                domNode.classList.remove("current");
+                domNode.classList.add("visited");
+            }
+        });
+        if (activePcts.length && _curTrack) {
+            const avg = activePcts.reduce((a, b) => a + b, 0) / activePcts.length;
+            const shift = 50 - avg;
+            _curTrack.style.setProperty("--shift", shift + "%");
+        }
+    }
+
+    function _timelineTypeFor(stateStr) {
+        if (!stateStr) return null;
+        if (stateStr === "lin-0" || stateStr.startsWith("lin-prod-")) return "war";
+        if (stateStr.startsWith("lin-game-") && stateStr !== "lin-game-intro") return "game";
+        if (stateStr === "lin-game-opponents") return "game";
+        if (stateStr.startsWith("lin-troll-") && stateStr !== "lin-troll-intro") return "troll";
+        if (stateStr.startsWith("lin-exp-") && stateStr !== "lin-exp-intro") return "expletive";
+        if (stateStr === "profanity" || stateStr === "profanity-sources") return "profanity";
+        return null;
+    }
+
     async function init() {
         linFocus = document.getElementById("lin-focus");
         linCard = document.getElementById("lin-card");
@@ -503,6 +540,9 @@ const VizStrike = (() => {
         if (linTimeline) { linTimeline.classList.remove("visible"); linTimeline.style.display = "none"; }
         if (linChartWrap) linChartWrap.classList.remove("visible");
         if (linCard) { linCard.style.opacity = "0"; linCard.querySelectorAll("video").forEach(v => v.pause()); }
+        _curType = null;
+        _curTrack = null;
+        _curNodeMap.clear();
     }
 
     function vidHTML(n) {
@@ -519,6 +559,9 @@ const VizStrike = (() => {
 
     function updateTimeline(idx) {
         linTimeline.innerHTML = "";
+        _curType = null;
+        _curTrack = null;
+        _curNodeMap.clear();
 
         const item = allNodes[idx];
         if (item.t === "trans") {
@@ -568,12 +611,12 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     linTimeline.appendChild(tick);
 
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     linTimeline.appendChild(label);
                 }
@@ -589,7 +632,7 @@ const VizStrike = (() => {
             node.className = "lt-node";
             if (sn.idx === idx) node.classList.add("current");
             else if (sn.idx < idx) node.classList.add("visited");
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.innerHTML = `<img src="images/grid/${sn.n.id}.jpg">`;
             linTimeline.appendChild(node);
         });
@@ -625,7 +668,20 @@ const VizStrike = (() => {
             return;
         }
 
+        // Reuse existing DOM if same timeline type
+        if (_curType === "war" && _curTrack) {
+            const baseIds = new Set(data.contrast.map(n => n.id));
+            const hlSet = highlightIds ? new Set(highlightIds) : null;
+            const activeIds = new Set();
+            if (hlSet) hlSet.forEach(id => activeIds.add(id));
+            else if (highlightId) activeIds.add(highlightId);
+            else baseIds.forEach(id => activeIds.add(id));
+            _updateActiveNode(activeIds);
+            return;
+        }
+
         linTimeline.innerHTML = "";
+        _curNodeMap.clear();
 
         const dates = warFootagePosts.map(p => new Date(p.date));
         const minD = new Date(Math.min(...dates));
@@ -655,12 +711,12 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     track.appendChild(tick);
 
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     track.appendChild(label);
                 }
@@ -696,10 +752,11 @@ const VizStrike = (() => {
             } else {
                 node.classList.add("visited");
             }
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.style.outlineColor = tier.color;
             node.innerHTML = `<img src="images/grid/${p.id}.jpg">`;
             track.appendChild(node);
+            _curNodeMap.set(p.id, node);
         });
 
         // Use center of highlighted cluster if multiple
@@ -710,7 +767,7 @@ const VizStrike = (() => {
         // Pan the track so the active post is centered
         if (activePct !== null) {
             const shift = 50 - activePct;
-            track.style.transform = `translateX(${shift}%)`;
+            track.style.setProperty("--shift", shift + "%");
         }
 
         // Legend with title — outside the track so it doesn't pan
@@ -724,6 +781,8 @@ const VizStrike = (() => {
             ].map(t => `<span class="lt-legend-item"><span class="lt-legend-dot" style="background:${t.color}"></span>${t.label}</span>`).join("");
         linTimeline.appendChild(legend);
 
+        _curType = "war";
+        _curTrack = track;
         linTimeline.style.display = "block";
         linTimeline.classList.add("visible");
     }
@@ -823,7 +882,13 @@ const VizStrike = (() => {
             return;
         }
 
+        if (_curType === "game" && _curTrack) {
+            _updateActiveNode(highlightIds);
+            return;
+        }
+
         linTimeline.innerHTML = "";
+        _curNodeMap.clear();
 
         const dates = fictionalPosts.map(p => new Date(p.date));
         const rawMin = new Date(Math.min(...dates));
@@ -854,11 +919,11 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     track.appendChild(tick);
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     track.appendChild(label);
                 }
@@ -876,9 +941,10 @@ const VizStrike = (() => {
             } else {
                 node.classList.add("visited");
             }
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.innerHTML = `<img src="images/grid/${p.id}.jpg">`;
             track.appendChild(node);
+            _curNodeMap.set(p.id, node);
         });
 
         const legend = document.createElement("div");
@@ -886,6 +952,8 @@ const VizStrike = (() => {
         legend.innerHTML = `<span class="lt-legend-title">Fictional overlays on non-war posts</span>`;
         linTimeline.appendChild(legend);
 
+        _curType = "game";
+        _curTrack = track;
         linTimeline.style.display = "block";
         linTimeline.classList.add("visible");
     }
@@ -907,7 +975,10 @@ const VizStrike = (() => {
             return;
         }
 
+        if (_curType === "profanity" && _curTrack) return;
+
         linTimeline.innerHTML = "";
+        _curNodeMap.clear();
 
         const dates = profanityPosts.map(p => new Date(p.date));
         const rawMin = new Date(Math.min(...dates));
@@ -937,11 +1008,11 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     track.appendChild(tick);
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     track.appendChild(label);
                 }
@@ -963,10 +1034,11 @@ const VizStrike = (() => {
             const node = document.createElement("div");
             node.className = "lt-node lt-tiered";
             node.classList.add("visited");
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.style.outlineColor = color;
             node.innerHTML = `<img src="images/grid/${p.id}.jpg">`;
             track.appendChild(node);
+            _curNodeMap.set(p.id, node);
         });
 
         const legend = document.createElement("div");
@@ -979,6 +1051,8 @@ const VizStrike = (() => {
             ].map(t => `<span class="lt-legend-item"><span class="lt-legend-dot" style="background:${t.color}"></span>${t.label}</span>`).join("");
         linTimeline.appendChild(legend);
 
+        _curType = "profanity";
+        _curTrack = track;
         linTimeline.style.display = "block";
         linTimeline.classList.add("visible");
     }
@@ -1006,7 +1080,20 @@ const VizStrike = (() => {
             return;
         }
 
+        if (_curType === "expletive" && _curTrack) {
+            const eNode = expletiveNodes[activeIdx];
+            const activeIds = new Set();
+            if (eNode) {
+                activeIds.add(eNode.id);
+                if (eNode.related_id) activeIds.add(eNode.related_id);
+                if (eNode.related_ids) eNode.related_ids.forEach(rid => activeIds.add(rid));
+            }
+            _updateActiveNode(activeIds);
+            return;
+        }
+
         linTimeline.innerHTML = "";
+        _curNodeMap.clear();
 
         const dates = expletivePosts.map(p => new Date(p.date));
         const rawMin = new Date(Math.min(...dates));
@@ -1036,11 +1123,11 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     track.appendChild(tick);
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     track.appendChild(label);
                 }
@@ -1076,16 +1163,17 @@ const VizStrike = (() => {
             } else {
                 node.classList.add("visited");
             }
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.style.outlineColor = color;
             node.innerHTML = `<img src="images/grid/${p.id}.jpg">`;
             track.appendChild(node);
+            _curNodeMap.set(p.id, node);
         });
 
         if (activePcts.length) {
             const avg = activePcts.reduce((a, b) => a + b, 0) / activePcts.length;
             const shift = 50 - avg;
-            track.style.transform = `translateX(${shift}%)`;
+            track.style.setProperty("--shift", shift + "%");
         }
 
         const legend = document.createElement("div");
@@ -1098,6 +1186,8 @@ const VizStrike = (() => {
             ].map(t => `<span class="lt-legend-item"><span class="lt-legend-dot" style="background:${t.color}"></span>${t.label}</span>`).join("");
         linTimeline.appendChild(legend);
 
+        _curType = "expletive";
+        _curTrack = track;
         linTimeline.style.display = "block";
         linTimeline.classList.add("visible");
     }
@@ -1122,7 +1212,19 @@ const VizStrike = (() => {
             return;
         }
 
+        if (_curType === "troll" && _curTrack) {
+            const tNode = trollNodes[activeIdx];
+            const activeIds = new Set();
+            if (tNode) {
+                activeIds.add(tNode.id);
+                if (tNode.related_id) activeIds.add(tNode.related_id);
+            }
+            _updateActiveNode(activeIds);
+            return;
+        }
+
         linTimeline.innerHTML = "";
+        _curNodeMap.clear();
 
         const dates = trollPosts.map(p => new Date(p.date));
         const rawMin = new Date(Math.min(...dates));
@@ -1152,11 +1254,11 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     track.appendChild(tick);
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     track.appendChild(label);
                 }
@@ -1183,14 +1285,15 @@ const VizStrike = (() => {
             } else {
                 node.classList.add("visited");
             }
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.innerHTML = `<img src="images/grid/${p.id}.jpg">`;
             track.appendChild(node);
+            _curNodeMap.set(p.id, node);
         });
 
         if (activePct !== null) {
             const shift = 50 - activePct;
-            track.style.transform = `translateX(${shift}%)`;
+            track.style.setProperty("--shift", shift + "%");
         }
 
         const legend = document.createElement("div");
@@ -1198,6 +1301,8 @@ const VizStrike = (() => {
         legend.innerHTML = `<span class="lt-legend-title">Troll posts on non-war subjects</span>`;
         linTimeline.appendChild(legend);
 
+        _curType = "troll";
+        _curTrack = track;
         linTimeline.style.display = "block";
         linTimeline.classList.add("visible");
     }
@@ -1224,7 +1329,14 @@ const VizStrike = (() => {
             return;
         }
 
+        if (_curType === "game" && _curTrack) {
+            const activeId = gameNodes[activeIdx] ? gameNodes[activeIdx].id : null;
+            _updateActiveNode(activeId ? new Set([activeId]) : new Set());
+            return;
+        }
+
         linTimeline.innerHTML = "";
+        _curNodeMap.clear();
 
         const dates = fictionalPosts.map(p => new Date(p.date));
         const minD = new Date(Math.min(...dates));
@@ -1253,12 +1365,12 @@ const VizStrike = (() => {
                     seen.add(k);
                     const tick = document.createElement("div");
                     tick.className = "lt-tick";
-                    tick.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    tick.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     track.appendChild(tick);
 
                     const label = document.createElement("div");
                     label.className = "lt-month";
-                    label.style.left = Math.max(0, Math.min(100, pct)) + "%";
+                    label.style.setProperty("--pct", Math.max(0, Math.min(100, pct)) + "%");
                     label.textContent = mNames[td.getMonth()] + " '" + td.getFullYear().toString().slice(2);
                     track.appendChild(label);
                 }
@@ -1282,15 +1394,16 @@ const VizStrike = (() => {
             } else {
                 node.classList.add("visited");
             }
-            node.style.left = pct + "%";
+            node.style.setProperty("--pct", pct + "%");
             node.innerHTML = `<img src="images/grid/${p.id}.jpg">`;
             track.appendChild(node);
+            _curNodeMap.set(p.id, node);
         });
 
         // Pan
         if (activePct !== null) {
             const shift = 50 - activePct;
-            track.style.transform = `translateX(${shift}%)`;
+            track.style.setProperty("--shift", shift + "%");
         }
 
         // Legend
@@ -1299,9 +1412,11 @@ const VizStrike = (() => {
         legend.innerHTML = `<span class="lt-legend-title">Fictional overlays on non-war posts</span>`;
         linTimeline.appendChild(legend);
 
+        _curType = "game";
+        _curTrack = track;
         linTimeline.style.display = "block";
         linTimeline.classList.add("visible");
     }
 
-    return { init, show, hide };
+    return { init, show, hide, timelineTypeFor: _timelineTypeFor };
 })();

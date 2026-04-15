@@ -407,6 +407,7 @@ body {
 .lt-track {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     transition: transform 0.8s ease;
+    transform: translateX(var(--shift, 0));
 }
 #lin-timeline.visible { display: block; }
 #lin-timeline .lt-axis {
@@ -414,17 +415,17 @@ body {
     height: 1px; background: #333;
 }
 #lin-timeline .lt-month {
-    position: absolute; top: 54px;
+    position: absolute; top: 54px; left: var(--pct);
     font-size: 0.5rem; color: #555;
     transform: translateX(-50%); white-space: nowrap;
 }
 #lin-timeline .lt-tick {
-    position: absolute; top: 48px;
+    position: absolute; top: 48px; left: var(--pct);
     width: 1px; height: 6px; background: #444;
     transform: translateX(-50%);
 }
 #lin-timeline .lt-node {
-    position: absolute; top: 8px;
+    position: absolute; top: 8px; left: var(--pct);
     width: 24px; aspect-ratio: 9/16;
     border-radius: 0; overflow: hidden;
     transform: translateX(-50%);
@@ -437,6 +438,12 @@ body {
 #lin-timeline .lt-node.current {
     opacity: 1; outline: 2px solid #fff; outline-offset: -1px;
     transform: translateX(-50%) scale(1.3); transform-origin: bottom center; z-index: 2;
+    animation: node-activate 0.5s ease-out;
+}
+@keyframes node-activate {
+    0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+    50% { box-shadow: 0 0 10px 3px rgba(255,255,255,0.3); }
+    100% { box-shadow: none; }
 }
 /* Color-coded war footage nodes */
 #lin-timeline .lt-node.lt-tiered { opacity: 0.7; outline-width: 2px; outline-style: solid; outline-offset: -1px; }
@@ -445,6 +452,7 @@ body {
 .lt-legend {
     position: absolute; top: 76px; left: 0;
     display: flex; flex-direction: column; gap: 4px;
+    transition: opacity 0.25s ease;
 }
 .lt-legend-title { font-size: 0.55rem; color: #aaa; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .lt-legend-item { font-size: 0.55rem; color: #888; display: flex; align-items: center; gap: 5px; white-space: nowrap; }

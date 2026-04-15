@@ -154,6 +154,16 @@
         _rafId = requestAnimationFrame(_applyState);
     }
 
+    function _getTimelineType(state) {
+        if (!state) return null;
+        if (state === "lin-0" || state.startsWith("lin-prod-")) return "war";
+        if ((state.startsWith("lin-game-") && state !== "lin-game-intro") || state === "lin-game-opponents") return "game";
+        if (state.startsWith("lin-troll-") && state !== "lin-troll-intro") return "troll";
+        if (state.startsWith("lin-exp-") && state !== "lin-exp-intro") return "expletive";
+        if (state === "profanity" || state === "profanity-sources") return "profanity";
+        return null;
+    }
+
     function _applyState() {
         _rafId = null;
         const newState = _pendingState;
@@ -161,6 +171,17 @@
         const prevState = currentState;
         currentState = newState;
         console.log(`State: ${prevState} → ${newState}`);
+
+        // Fast-path: same timeline type → skip resetAll so DOM survives for smooth CSS transitions
+        const newTlType = _getTimelineType(newState);
+        const prevTlType = _getTimelineType(prevState);
+        if (newTlType && prevTlType && newTlType === prevTlType) {
+            VizStrike.show(newState);
+            audioBtn.classList.add("visible");
+            updateNavVisibility();
+            updateLinProgress();
+            return;
+        }
 
         // Suppress CSS transitions during reset→rebuild (prevents flicker)
         _vizContainer.classList.add("notransition");
