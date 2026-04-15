@@ -19,6 +19,12 @@ So when the White House crossed 600 TikToks on April 1, I took it that it is tim
 
 **TL;DR** I watched, classified, tagged and took notes of every TikTok video from the Trump White House (Aug 19, 2025 to Apr 1, 2026, with a 600-post cut-off) so you don't have to.
 
+## Visual references
+
+- This [Tucker Carlson Tonight piece](https://www.nytimes.com/interactive/2022/04/30/us/tucker-carlson-tonight.html) by the New York Times (Thanks to Jasmine Cui for pointing me to it!)
+- Bloomberg's [YouTube’s Right-Wing Stars Fuel Boom in Politically Charged Ads](https://www.bloomberg.com/graphics/2025-conservative-youtube-stars-marketing-boom/)
+- New York Times' [Dancing With the Stairs](https://www.nytimes.com/interactive/2023/01/20/arts/dance/stair-dancing.html)
+
 ## Structure
 
 The classification work is documented in `data/classifications_final.csv`, `data/CLASSIFICATION_MATRIX.md`. The Jupyter notebooks in `notebooks/` contain the exploratory analysis that informed the narrative, testing different groupings, checking tag co-occurrences, and verifying the statistical claims that appear in the piece.
