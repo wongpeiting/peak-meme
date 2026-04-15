@@ -367,6 +367,11 @@
                 VizGrid.highlight("dim-all");
                 break;
 
+            case "roadmap":
+            case "three-acts":
+                VizGrid.show();
+                VizGrid.highlight("dim-all");
+                break;
 
             case "pre-lineage":
                 VizGrid.show();
