@@ -46,6 +46,7 @@ body {
 .audio-btn:hover { background: rgba(0,0,0,0.8); }
 .audio-icon { font-size: 1.1rem; }
 .audio-label { font-size: 0.7rem; color: #aaa; }
+@media (max-width: 700px) { .audio-label { display: none; } }
 
 /* ─── Opening + Closing scenes ─── */
 
@@ -322,9 +323,9 @@ body {
     padding: 40px 12px 12px;
     background: linear-gradient(transparent, rgba(0,0,0,0.85));
 }
-#lin-focus .lin-vid-footer .lvf-handle { font-size: 0.6rem; color: #ccc; font-weight: 600; margin-bottom: 4px; text-align: left; }
-#lin-focus .lin-vid-footer .lvf-caption { font-size: 0.75rem; font-weight: 600; color: #fff; line-height: 1.3; text-align: left; }
-#lin-focus .lin-vid-footer .lvf-meta { font-size: 0.55rem; color: #aaa; margin-top: 3px; text-align: left; }
+#lin-focus .lin-vid-footer .lvf-handle { font-size: 0.75rem; color: #ccc; font-weight: 600; margin-bottom: 4px; text-align: left; }
+#lin-focus .lin-vid-footer .lvf-caption { font-size: 0.9rem; font-weight: 600; color: #fff; line-height: 1.3; text-align: left; }
+#lin-focus .lin-vid-footer .lvf-meta { font-size: 0.85rem; color: #aaa; margin-top: 3px; text-align: left; }
 
 #lin-focus .lin-ann { max-width: 320px; margin-left: 16px; }
 #lin-focus .lin-ann-phase {
@@ -412,16 +413,16 @@ body {
 #lin-timeline.visible { display: block; }
 #lin-timeline .lt-axis {
     position: absolute; top: 50px; left: 0; right: 0;
-    height: 1px; background: #333;
+    height: 1px; background: #888;
 }
 #lin-timeline .lt-month {
-    position: absolute; top: 54px; left: var(--pct);
-    font-size: 0.5rem; color: #555;
+    position: absolute; top: 56px; left: var(--pct);
+    font-size: 0.7rem; color: #ccc;
     transform: translateX(-50%); white-space: nowrap;
 }
 #lin-timeline .lt-tick {
     position: absolute; top: 48px; left: var(--pct);
-    width: 1px; height: 6px; background: #444;
+    width: 1px; height: 6px; background: #888;
     transform: translateX(-50%);
 }
 #lin-timeline .lt-node {
@@ -450,12 +451,12 @@ body {
 #lin-timeline .lt-node.lt-tiered.current { opacity: 1; outline-offset: -1px; transform: translateX(-50%) scale(1.5); transform-origin: bottom center; z-index: 2; }
 /* Legend */
 .lt-legend {
-    position: absolute; top: 76px; left: 0;
+    position: absolute; top: 80px; left: 0;
     display: flex; flex-direction: column; gap: 4px;
     transition: opacity 0.25s ease;
 }
-.lt-legend-title { font-size: 0.55rem; color: #aaa; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-.lt-legend-item { font-size: 0.55rem; color: #888; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.lt-legend-title { font-size: 0.7rem; color: #ccc; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.lt-legend-item { font-size: 0.7rem; color: #bbb; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
 .lt-legend-dot { width: 8px; height: 12px; border-radius: 0; flex-shrink: 0; }
 
 /* Zoom-out chart */
@@ -483,6 +484,9 @@ body {
     #lin-focus .lin-vid { width: min(160px, 42vw); }
     #lin-focus .lin-ann { max-width: 82vw; margin-left: 0; width: 82vw; padding: 0 4vw; }
     #lin-focus .lin-ann-note { font-size: 1.15rem; line-height: 1.6; }
+    #lin-focus .lin-vid-footer .lvf-handle { font-size: 0.6rem; }
+    #lin-focus .lin-vid-footer .lvf-caption { font-size: 0.75rem; }
+    #lin-focus .lin-vid-footer .lvf-meta { font-size: 0.55rem; }
     #lin-focus .lin-pair { justify-content: center; }
     #lin-focus .lin-pair.lin-pair--sm {
         display: flex !important;
@@ -521,14 +525,14 @@ body {
     #lin-progress.visible { opacity: 1; }
     .lp-dots { display: flex; flex-direction: column; gap: 8px; }
     .lp-dot {
-        width: 6px; height: 6px; border-radius: 50%;
+        width: 8px; height: 8px; border-radius: 50%;
         background: #333; transition: background 0.3s, transform 0.3s;
     }
     .lp-dot.active { background: #fff; transform: scale(1.4); }
     .lp-dot.past { background: #555; }
     .lp-label {
         font-family: 'Space Grotesk', sans-serif;
-        font-size: 0.5rem; font-weight: 600;
+        font-size: 0.65rem; font-weight: 600;
         letter-spacing: 0.1em; text-transform: uppercase;
         color: #666;
         writing-mode: vertical-rl;
@@ -541,7 +545,7 @@ body {
     .pkg-chart-inner { display: none !important; }
     #pkg-chart-mobile { display: flex !important; }
     .step-card--dramatic { max-width: 85vw !important; padding: 24px 20px !important; }
-    [data-state="grid-final"] .step-card { padding-top: 48px !important; }
+    [data-state="grid-final"] .step-card { padding-top: 28px !important; }
 }
 
 /* ─── Article section ─── */
@@ -1053,7 +1057,8 @@ body {
     }
 
     .step-card--headline {
-        padding: 2.5rem 1.5rem;
+        padding: 4rem 1.5rem;
+        margin: 12rem 0 8rem;
     }
 
     #comparison-panel {

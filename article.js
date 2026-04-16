@@ -457,7 +457,7 @@
                         <div style="display:flex;flex-direction:column;align-items:center;padding:0;width:20px;">
                             <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:11px solid #aaa;"></div>
                             <div style="width:2px;flex:1;background:#aaa;"></div>
-                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.65rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Level of escalation</div>
+                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.65rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Packaging intensity</div>
                         </div>
                         <div style="flex:1;display:flex;flex-direction:column;gap:10px;">` +
                     levels.map(lv => {
@@ -478,7 +478,7 @@
                         <div style="display:flex;flex-direction:column;align-items:center;width:16px;flex-shrink:0;">
                             <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:9px solid #aaa;"></div>
                             <div style="width:1.5px;flex:1;background:#aaa;"></div>
-                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.55rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Level of escalation</div>
+                            <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.55rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Packaging intensity</div>
                         </div>
                         <div style="flex:1;display:flex;flex-direction:column;gap:8px;">` +
                     levels.map(lv => {

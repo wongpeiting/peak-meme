@@ -19,14 +19,14 @@
 
     <button class="audio-btn" id="audio-btn" onclick="toggleAudio()">
         <span class="audio-icon" id="audio-icon">&#128263;</span>
-        <span class="audio-label" id="audio-label">Tap for sound</span>
+        <span class="audio-label" id="audio-label">Play sound</span>
     </button>
     <script>
         window.audioEnabled = false;
         function toggleAudio() {
             window.audioEnabled = !window.audioEnabled;
             document.getElementById("audio-icon").innerHTML = window.audioEnabled ? "&#128266;" : "&#128263;";
-            document.getElementById("audio-label").textContent = window.audioEnabled ? "" : "Tap for sound";
+            document.getElementById("audio-label").textContent = window.audioEnabled ? "" : "Play sound";
             // Unmute/mute all video elements
             document.querySelectorAll("video").forEach(function(v) { v.muted = !window.audioEnabled; });
         }
@@ -101,7 +101,7 @@
 
             <div class="a-step" data-state="text-4">
                 <div class="step-card step-card--center step-card--dramatic">
-                    <p>Each time, it lands a little differently — cut to a beat, overlaid with graphics, trimmed into a loop that feels less like official messaging and more like something engineered for the churn of the feed.</p>
+                    <p>Each time, it lands a little differently — cut to a beat, overlaid with graphics, looped to keep you watching.</p>
                 </div>
             </div>
 

@@ -552,7 +552,7 @@ const VizStrike = (() => {
             <div class="lin-vid-footer">
                 <div class="lvf-handle">@whitehouse</div>
                 <div class="lvf-caption">${caption}</div>
-                <div class="lvf-meta">${n.date} · ${(n.views/1e6).toFixed(1)}M views</div>
+                <div class="lvf-meta">${n.date} · <strong>${(n.views/1e6).toFixed(1)}M views</strong></div>
             </div>
         </div>`;
     }
