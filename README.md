@@ -21,12 +21,6 @@ So when the White House crossed 600 TikToks on April 1, I took it that it is tim
 
 **TL;DR** I watched, classified, tagged and took notes of every TikTok video from the Trump White House (Aug 19, 2025 to Apr 1, 2026, with a 600-post cut-off) so you don't have to.
 
-## Visual references
-
-- This [Tucker Carlson Tonight piece](https://www.nytimes.com/interactive/2022/04/30/us/tucker-carlson-tonight.html) by the New York Times (Thanks to Jasmine Cui for pointing me to it!)
-- Bloomberg's [YouTube’s Right-Wing Stars Fuel Boom in Politically Charged Ads](https://www.bloomberg.com/graphics/2025-conservative-youtube-stars-marketing-boom/)
-- New York Times' [Dancing With the Stairs](https://www.nytimes.com/interactive/2023/01/20/arts/dance/stair-dancing.html)
-
 ## Structure
 
 The classification work is documented in `data/classifications_final.csv`, `data/CLASSIFICATION_MATRIX.md`. The Jupyter notebooks in `notebooks/` contain the exploratory analysis that informed the narrative, testing different groupings, checking tag co-occurrences, and verifying the statistical claims that appear in the piece.
@@ -55,3 +49,19 @@ notebooks/
   explore_classifications.ipynb   Classification analysis and data review
   profanity_analysis.ipynb        Profanity tracking and source breakdown
 ```
+
+## How I designed with Claude
+
+A big part of this project was its visual elements. The brief by my professor, Jonathan Soma, was to build a visual narrative. I thought there's nothing better than to kick off a scrolly about memes with a meme. The iconic 'this is fine' dog by [KC Green](https://kcgreendotcom.com/) came to mind. While cleaning up my assets for this project, I came across the very prompt that kicked it off, so I am leaving it here for posterity:
+<img width="1093" height="746" alt="Image" src="https://github.com/user-attachments/assets/0af2334d-8973-452d-a94e-5f75b45039d7" />
+
+For other parts of the project, I took heavy visual reference from the New York Times' exploration of [Tucker Carlson Tonight episodes](https://www.nytimes.com/interactive/2022/04/30/us/tucker-carlson-tonight.html) (Thanks to Jasmine Cui for pointing me to it!), and Bloomberg's [YouTube’s Right-Wing Stars Fuel Boom in Politically Charged Ads](https://www.bloomberg.com/graphics/2025-conservative-youtube-stars-marketing-boom/) (+ Leon Yin's NICAR sharing covering how to work with TikTok content). 
+
+I started with a Vanilla JS version of grid layout of the 600 White House posts, tried to pivot the grid to a D3.js wireframe in between, but returned to the vanilla version in the end. Swimming in D3 without the proper vocab to specify more complicated requirements – such as having videos move toward the reader and start playing with a scroll step – was daunting. I couldn't debug confidently enough, and decided that I was better off working with what I could control, especially with a deadline looming. Here's how broken it looked when I made the switch to D3:
+<img width="1431" height="782" alt="Image" src="https://github.com/user-attachments/assets/48f895f1-32db-4a01-9237-b37a8350bf20" />
+
+No hate on D3 though. I think it's fantastic. I just haven't figured it out.
+
+### Happy to hear from you
+
+I can be reached on pw2635@columbia.edu. Big thanks to [Soma](https://x.com/dangerscarf), [Kai Teoh](https://x.com/jkteoh) and [Dhrumil Mehta](https://x.com/DataDhrumil) for providing great feedback on this piece, allowing me to shape the project direction and make critical tweaks to narrative flow before I present it to the world.
