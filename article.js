@@ -589,35 +589,60 @@
         { label: "Explicit", states: ["lin-exp-intro","lin-exp-0","lin-exp-1","lin-exp-2","lin-exp-3","lin-exp-4","profanity-sources","profanity","lin-exp-5","lin-exp-6"] },
     ];
 
+    // Total steps across all sections
+    const _allLinStates = linSections.flatMap(s => s.states);
+    const _numSections = linSections.length;
+    // Equal-sized sections: each gets 1/N of the bar
+    const _sectionSize = 100 / _numSections;
+    const _notchPcts = linSections.map((_, i) => i * _sectionSize);
+
     if (isMobile) {
         const prog = document.createElement("div");
         prog.id = "lin-progress";
+        const notchesHTML = _notchPcts.slice(1).map(pct =>
+            `<div class="lp-notch" style="top:${pct}%"></div>`
+        ).join("");
+        const labelsHTML = linSections.map((sec, i) => {
+            const startPct = _notchPcts[i];
+            const endPct = i < _notchPcts.length - 1 ? _notchPcts[i + 1] : 100;
+            const midPct = (startPct + endPct) / 2 - 5 - (i === 0 ? 1 : 0);
+            return `<div class="lp-section-label" data-section="${i}" style="top:${midPct}%">${sec.label}</div>`;
+        }).join("");
         prog.innerHTML = `
-            <div class="lp-dots">${linSections.map(() => '<span class="lp-dot"></span>').join("")}</div>
-            <div class="lp-label"></div>`;
+            <div class="lp-track">
+                <div class="lp-fill"></div>
+                ${notchesHTML}
+            </div>
+            <div class="lp-dot"></div>
+            ${labelsHTML}`;
         _vizContainer.appendChild(prog);
     }
 
     function updateLinProgress() {
         const prog = document.getElementById("lin-progress");
         if (!prog) return;
-        const dots = prog.querySelectorAll(".lp-dot");
-        const label = prog.querySelector(".lp-label");
-        let found = false;
 
+        // Find which section and step within it
+        let activeSection = -1, stepInSection = -1;
         for (let i = 0; i < linSections.length; i++) {
-            const sec = linSections[i];
-            const idx = sec.states.indexOf(currentState);
-            dots[i].classList.remove("active", "past");
-            if (idx >= 0) {
-                dots[i].classList.add("active");
-                label.textContent = `${sec.label} · ${idx + 1} / ${sec.states.length}`;
-                found = true;
-                // Mark previous sections as past
-                for (let j = 0; j < i; j++) dots[j].classList.add("past");
-            }
+            const idx = linSections[i].states.indexOf(currentState);
+            if (idx >= 0) { activeSection = i; stepInSection = idx; break; }
         }
+        const found = activeSection >= 0;
         prog.classList.toggle("visible", found);
+        if (!found) return;
+
+        // Position within equal-sized sections
+        const stepsInSec = linSections[activeSection].states.length;
+        const withinPct = stepsInSec > 1 ? stepInSection / (stepsInSec - 1) : 0;
+        const pct = _notchPcts[activeSection] + withinPct * _sectionSize;
+
+        prog.querySelector(".lp-fill").style.height = pct + "%";
+        prog.querySelector(".lp-dot").style.top = pct + "%";
+
+        // Highlight active section label
+        const labels = prog.querySelectorAll(".lp-section-label");
+        labels.forEach((el, i) => el.classList.toggle("active", i === activeSection));
     }
 
 
