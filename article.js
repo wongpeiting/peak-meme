@@ -180,14 +180,40 @@
             audioBtn.classList.add("visible");
             updateNavVisibility();
             updateLinProgress();
+            if (isMobile) fitLinCard();
             return;
         }
 
-        // Suppress CSS transitions during reset→rebuild (prevents flicker)
-        _vizContainer.classList.add("notransition");
+        // Fast-path: mobile text steps → skip resetAll so videos keep playing
+        const textStates = ["text-2", "text-3", "text-4", "text-5"];
+        if (isMobile && textStates.includes(newState) && textStates.includes(prevState)) {
+            const newIdx = textStates.indexOf(newState);
+            if (newIdx >= 1) showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");
+            if (newIdx >= 2) showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-tl");
+            if (newIdx >= 3) showMobileVid(vidOverlay4, vidEl4, "7613864676010511629", "q-br");
+            if (newIdx < 1) { vidOverlay2.classList.remove("active"); vidEl2.pause(); }
+            if (newIdx < 2) { vidOverlay3.classList.remove("active"); vidEl3.pause(); }
+            if (newIdx < 3) { vidOverlay4.classList.remove("active"); vidEl4.pause(); }
+            audioBtn.classList.add("visible");
+            updateNavVisibility();
+            return;
+        }
 
-        // Reset everything to neutral first
-        resetAll();
+        // Fast-path (mobile only): grid-to-grid → skip resetAll so grid stays visible, just update highlight
+        const _gridStates = new Set([
+            "zoom-out-grid", "war-memes-all", "broader-shift",
+            "headline", "roadmap", "three-acts", "grid-final", "pre-lineage",
+            "lin-troll-intro", "lin-exp-intro", "lin-game-intro",
+            "grid-return", "blind-spot-intro", "blind-spot-flagged", "blind-spot-unflagged", "kicker"
+        ]);
+        const isGridToGrid = isMobile && _gridStates.has(newState) && _gridStates.has(prevState);
+
+        if (!isGridToGrid) {
+            // Suppress CSS transitions during reset→rebuild (prevents flicker)
+            _vizContainer.classList.add("notransition");
+            // Reset everything to neutral first
+            resetAll();
+        }
 
         // Then activate only what this state needs
         switch (newState) {
@@ -246,11 +272,11 @@
                 break;
 
             case "text-4":
-                // Mobile: accumulate — HOME RUN appears bottom-right
+                // Mobile: accumulate — HOME RUN appears top-left
                 if (isMobile) {
                     showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");
                     showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");
-                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-br");
+                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-tl");
                     audioBtn.classList.add("visible");
                     break;
                 }
@@ -281,12 +307,12 @@
                 break;
 
             case "text-5":
-                // Mobile: accumulate — Spongebob appears top-left (all 4 now on screen)
+                // Mobile: accumulate — Spongebob appears bottom-right (all 4 now on screen)
                 if (isMobile) {
                     showMobileVid(vidOverlay, vidEl, "7613406980719283486", "q-bl");
                     showMobileVid(vidOverlay2, vidEl2, "7613501531765116191", "q-tr");
-                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-br");
-                    showMobileVid(vidOverlay4, vidEl4, "7613864676010511629", "q-tl");
+                    showMobileVid(vidOverlay3, vidEl3, "7614249170542562573", "q-tl");
+                    showMobileVid(vidOverlay4, vidEl4, "7613864676010511629", "q-br");
                     audioBtn.classList.add("visible");
                     break;
                 }
@@ -324,12 +350,12 @@
                     526,  // HOME RUN (527/600)
                     544,  // STRIKE (545/600)
                 ];
-                if (prevState === "war-memes-all" || prevState === "grid-intro") {
-                    // Scrolling back — show grid instantly with five highlights
+                if (isGridToGrid || prevState === "war-memes-all" || prevState === "grid-intro") {
+                    // Grid already visible or scrolling back — instant
                     VizGrid.show(false);
                     VizGrid.zoomToPost(seenVideos, null, true);
                 } else {
-                    // Scrolling forward — cascade in
+                    // Scrolling forward from non-grid state — cascade in
                     VizGrid.show(true);
                     setTimeout(() => {
                         VizGrid.zoomToPost(seenVideos, null, true);
