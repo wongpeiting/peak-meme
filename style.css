@@ -300,6 +300,10 @@ body {
 
 /* ─── Lineage ─── */
 
+#lin-card {
+    max-width: 90vw;
+}
+
 #lin-focus .lin-vid {
     width: min(290px, 44vw);
     background: #000;
@@ -308,6 +312,11 @@ body {
     flex-shrink: 0;
     position: relative;
     box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+}
+#lin-card > .lin-vid,
+#lin-card > .lin-pair > .lin-vid {
+    flex-shrink: 1;
+    min-width: 180px;
 }
 #lin-focus .lin-vid video {
     width: 100%;
@@ -327,16 +336,17 @@ body {
 #lin-focus .lin-vid-footer .lvf-caption { font-size: 0.9rem; font-weight: 600; color: #fff; line-height: 1.3; text-align: left; }
 #lin-focus .lin-vid-footer .lvf-meta { font-size: 0.85rem; color: #aaa; margin-top: 3px; text-align: left; }
 
-#lin-focus .lin-ann { max-width: 320px; margin-left: 16px; }
+#lin-focus .lin-ann { max-width: 320px; margin-left: 16px; min-width: 0; }
 #lin-focus .lin-ann-phase {
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; margin-bottom: 6px;
 }
 #lin-focus .lin-ann-note {
     font-family: 'Newsreader', serif;
-    font-size: 1.3rem; line-height: 1.7; color: #aaa;
+    font-size: clamp(0.95rem, 1.6vw, 1.3rem); line-height: 1.7; color: #aaa;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-wrap: break-word;
 }
 
 #lin-focus .lin-pair {
