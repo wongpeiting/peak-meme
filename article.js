@@ -649,23 +649,26 @@
 
     // ─── Auto-shrink lineage text to fit viewport ───
     function fitLinCard() {
-        const card = document.getElementById("lin-card");
-        if (!card) return;
-        const note = card.querySelector(".lin-ann-note");
-        if (!note) return;
-        // Reset to default size first
-        note.style.fontSize = "";
-        // Wait for layout to settle, then check overflow
-        requestAnimationFrame(() => {
-            let size = parseFloat(getComputedStyle(note).fontSize);
-            const minSize = 12; // never go below 12px
-            let tries = 0;
-            while (card.scrollHeight > card.clientHeight && size > minSize && tries < 10) {
-                size -= 1;
-                note.style.fontSize = size + "px";
-                tries++;
-            }
-        });
+        // Delay past the 80ms content-setting timeouts so we measure the actual new text
+        setTimeout(() => {
+            const card = document.getElementById("lin-card");
+            if (!card) return;
+            const note = card.querySelector(".lin-ann-note");
+            if (!note) return;
+            // Reset to default size first
+            note.style.fontSize = "";
+            // Wait for layout to settle, then check overflow
+            requestAnimationFrame(() => {
+                let size = parseFloat(getComputedStyle(note).fontSize);
+                const minSize = 15; // never go below 15px
+                let tries = 0;
+                while (card.scrollHeight > card.clientHeight && size > minSize && tries < 10) {
+                    size -= 1;
+                    note.style.fontSize = size + "px";
+                    tries++;
+                }
+            });
+        }, 120);
     }
 
     // ─── Resize ───
