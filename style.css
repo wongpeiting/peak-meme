@@ -335,6 +335,8 @@ body {
 #lin-focus .lin-ann-note {
     font-family: 'Newsreader', serif;
     font-size: 1.3rem; line-height: 1.7; color: #aaa;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #lin-focus .lin-pair {

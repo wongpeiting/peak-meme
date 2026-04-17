@@ -9,6 +9,7 @@ const VizGrid = (() => {
     let container, posts;
     let gridEl, videoBox, vid, vidCaption;
     let built = false;
+    let _preload = Promise.resolve();
 
     // The 12 war meme posts — always shaded yellow once revealed
     const WAR_MEME_12 = new Set([515, 517, 520, 521, 522, 525, 526, 527, 528, 537, 543, 544]);
@@ -20,6 +21,10 @@ const VizGrid = (() => {
 
     function setData(gridPosts) {
         posts = gridPosts;
+    }
+
+    function setPreload(promise) {
+        _preload = promise || Promise.resolve();
     }
 
     function build() {
@@ -49,8 +54,9 @@ const VizGrid = (() => {
             "2026-04": "Apr",
         };
 
-        // Build grid in a document fragment to avoid 600 individual DOM insertions
+        // Build cells without images first (placeholder grid)
         const frag = document.createDocumentFragment();
+        const cellEls = [];
         let currentMonth = null;
         posts.forEach((p, i) => {
             if (isMobile && p.month !== currentMonth) {
@@ -64,15 +70,21 @@ const VizGrid = (() => {
             const cell = document.createElement("div");
             cell.className = "wh-cell";
             cell.dataset.index = i;
-            if (p.thumb) {
-                const img = document.createElement("img");
-                img.src = p.thumb;
-                img.loading = i < 60 ? "eager" : "lazy";
-                cell.appendChild(img);
-            }
+            cellEls.push({ cell, thumb: p.thumb });
             frag.appendChild(cell);
         });
         gridEl.appendChild(frag);
+
+        // Wait for preloaded thumbnails, then insert all images at once
+        _preload.then(() => {
+            cellEls.forEach(({ cell, thumb }) => {
+                if (thumb) {
+                    const img = document.createElement("img");
+                    img.src = thumb;
+                    cell.appendChild(img);
+                }
+            });
+        });
 
         // Build timeline
         buildTimeline(monthLabels);
@@ -286,6 +298,6 @@ const VizGrid = (() => {
 
     function resize() {}
 
-    return { init, setData, show, hide, highlight, zoomToPost, showVideo, hideVideo, getCellRect, resetZoom, resize };
+    return { init, setData, setPreload, show, hide, highlight, zoomToPost, showVideo, hideVideo, getCellRect, resetZoom, resize };
 
 })();

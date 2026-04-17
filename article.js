@@ -28,6 +28,16 @@
 
     console.log(`Loaded: ${gridPosts.length} posts`);
 
+    // Preload all grid thumbnails so they appear instantly when the grid builds
+    const _thumbsReady = Promise.all(gridPosts.map(p => {
+        if (!p.thumb) return Promise.resolve();
+        return new Promise(resolve => {
+            const img = new Image();
+            img.onload = img.onerror = resolve;
+            img.src = p.thumb;
+        });
+    }));
+
     // Build lookup for related videos
     window._gridPostsById = {};
     gridPosts.forEach(p => { window._gridPostsById[p.id] = p; });
@@ -37,6 +47,7 @@
     // VizLineage removed — no longer used
 
     VizGrid.setData(gridPosts);
+    VizGrid.setPreload(_thumbsReady);
     await VizStrike.init();
     svgEl.style.display = "none"; // Hidden until lineage section
 
@@ -355,11 +366,8 @@
                     VizGrid.show(false);
                     VizGrid.zoomToPost(seenVideos, null, true);
                 } else {
-                    // Scrolling forward from non-grid state — cascade in
-                    VizGrid.show(true);
-                    setTimeout(() => {
-                        VizGrid.zoomToPost(seenVideos, null, true);
-                    }, 1800);
+                    VizGrid.show(false);
+                    VizGrid.zoomToPost(seenVideos, null, true);
                 }
                 break;
             }
