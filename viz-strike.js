@@ -197,9 +197,13 @@ const VizStrike = (() => {
                 ];
 
                 const isMob = window.innerWidth <= 700;
-                const cellSize = isMob ? 28 : 36;
-                const cellGap = isMob ? 3 : 5;
+                const vw = window.innerWidth;
                 const cols = 7;
+                const useSideLabels = !isMob && vw >= 1000;
+                // Reserve space for side annotations if they'll be shown
+                const availW = isMob ? vw * 0.85 : useSideLabels ? vw - 380 : vw * 0.55;
+                const cellGap = isMob ? 3 : 6;
+                const cellSize = isMob ? 28 : Math.min(52, Math.max(28, Math.floor((availW - (cols - 1) * cellGap) / cols)));
 
                 // Build waffle with annotations
                 // Red: rows 0-3 full (28) + row 4 first 3 = 24 absent (but we have 24 absent, 8 green, 3 orange = 35)
@@ -212,7 +216,8 @@ const VizStrike = (() => {
                 // remaining 3 are orange
 
                 const gridW = cols * cellSize + (cols - 1) * cellGap;
-                const annStyle = "font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;line-height:1.5;";
+                const annFontSize = isMob ? "0.85rem" : `${Math.min(1.1, Math.max(0.85, vw / 1200))}rem`;
+                const annStyle = `font-family:'Space Grotesk',sans-serif;font-size:${annFontSize};font-weight:600;line-height:1.5;`;
                 const sideAnnotations = `
                         <div style="position:absolute;top:0;left:-10px;transform:translateX(-100%);${annStyle}color:#94a3b8;text-align:left;">
                             Absent from<br>Instagram
@@ -243,9 +248,9 @@ const VizStrike = (() => {
                         <div style="display:grid;grid-template-columns:repeat(${cols},${cellSize}px);gap:${cellGap}px;">
                             ${cells.map(c => `<div style="width:${cellSize}px;height:${cellSize}px;background:${c};"></div>`).join("")}
                         </div>
-                        ${isMob ? '' : sideAnnotations}
+                        ${useSideLabels ? sideAnnotations : ''}
                     </div>
-                    ${isMob ? legendBelow : ''}`;
+                    ${useSideLabels ? '' : legendBelow}`;
                 linCard.style.opacity = "1";
                 buildProfanityTimeline();
             }, 80);
@@ -304,6 +309,7 @@ const VizStrike = (() => {
             setTimeout(() => {
                 linCard.style.flexDirection = "column";
                 linCard.style.textAlign = "center";
+                linCard.style.gap = "8px";
                 // Exclude Trump direct speech, sort by count descending
                 const sources = (data.profanity_sources || [])
                     .filter(s => s.label !== "Trump direct speech")
@@ -311,14 +317,14 @@ const VizStrike = (() => {
                 const maxCount = sources.length ? sources[0].count : 1;
                 const chartId = "prof-bar-" + Date.now();
                 linCard.innerHTML = `
-                    <div class="lin-ann" style="margin:0 0 16px 0;text-align:center;max-width:500px;">
+                    <div class="lin-ann" style="margin:0 0 4px 0;text-align:center;max-width:500px;">
                         <div class="lin-ann-note">Where profanities did not come through the president or an acronym, they came from these sources.</div>
                     </div>
-                    <div id="${chartId}" style="max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:14px;transform:translateX(-30px);">
+                    <div id="${chartId}" style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:10px;transform:translateX(-30px);">
                         ${sources.map(s => `
-                            <div style="display:flex;align-items:center;gap:14px;">
-                                <div style="width:120px;text-align:right;font-size:0.85rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;">${s.label}</div>
-                                <div class="emoji-bar" style="font-size:1.4rem;letter-spacing:3px;text-align:left;">${"🤬".repeat(s.count)}</div>
+                            <div style="display:flex;align-items:center;gap:18px;">
+                                <div style="width:160px;text-align:right;font-size:1.05rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;">${s.label}</div>
+                                <div class="emoji-bar" style="font-size:2rem;letter-spacing:5px;text-align:left;">${"🤬".repeat(s.count)}</div>
                             </div>
                         `).join("")}
                     </div>`;

@@ -707,6 +707,8 @@
         resizeTimer = setTimeout(() => {
             VizGrid.resize();
             ScrollTrigger.refresh();
+            // Re-render lineage card for current state (responsive charts)
+            if (currentState) VizStrike.show(currentState);
         }, 200);
     });
 
