@@ -551,6 +551,27 @@
         });
     });
 
+    // ─── Desktop reading progress bar ───
+    if (!isMobile) {
+        const _progBar = document.getElementById("reading-progress");
+        const _progFill = document.getElementById("reading-progress-fill");
+        const _article = document.getElementById("article");
+        if (_progBar && _progFill && _article) {
+            window.addEventListener("scroll", () => {
+                const rect = _article.getBoundingClientRect();
+                const articleH = _article.offsetHeight - window.innerHeight;
+                const scrolled = -rect.top;
+                if (scrolled < 0 || rect.bottom < 0) {
+                    _progBar.classList.remove("visible");
+                } else {
+                    _progBar.classList.add("visible");
+                    const pct = Math.min(100, Math.max(0, (scrolled / articleH) * 100));
+                    _progFill.style.width = pct + "%";
+                }
+            }, { passive: true });
+        }
+    }
+
     // ─── Step nav arrows ───
     const stepNav = document.getElementById("step-nav");
     const navStates = new Set([
