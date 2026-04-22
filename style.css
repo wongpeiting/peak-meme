@@ -519,7 +519,8 @@ body {
     #lin-card > .lin-vid,
     #lin-card > .lin-pair > .lin-vid { min-width: 0; }
     #lin-focus .lin-ann { max-width: 76vw; margin-left: 0; width: 76vw; padding: 0 2vw; text-align: left !important; }
-    #lin-focus .lin-ann-note { font-size: 0.95rem; line-height: 1.5; text-align: left !important; }
+    #lin-focus .lin-ann { margin-top: 18px; }
+    #lin-focus .lin-ann-note { font-size: 1.05rem; line-height: 1.5; text-align: left !important; color: #fff; }
     #lin-focus .lin-vid-footer .lvf-handle { font-size: 0.6rem; }
     #lin-focus .lin-vid-footer .lvf-caption { font-size: 0.75rem; }
     #lin-focus .lin-vid-footer .lvf-meta { font-size: 0.55rem; }
