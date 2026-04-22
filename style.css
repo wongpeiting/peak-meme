@@ -376,7 +376,7 @@ body {
 }
 #lin-focus .lin-pair .lin-vid { width: min(220px, 35vw); }
 #lin-focus .lin-pair.lin-pair--sm .lin-vid { width: min(150px, 25vw); }
-#lin-focus .lin-pair + .lin-ann { max-width: 500px; margin-left: 0; }
+#lin-focus .lin-pair + .lin-ann { max-width: 500px; margin-left: 0; margin-top: 20px; }
 
 
 /* Mini grid (16 opponents etc.) */
@@ -516,8 +516,10 @@ body {
 @media (max-width: 700px) {
     #lin-card { flex-direction: column !important; gap: 14px !important; text-align: left; top: 50% !important; align-items: center !important; max-height: 88dvh; overflow: hidden; left: calc(50% + 16px) !important; }
     #lin-focus .lin-vid { width: min(160px, 42vw); }
+    #lin-card > .lin-vid,
+    #lin-card > .lin-pair > .lin-vid { min-width: 0; }
     #lin-focus .lin-ann { max-width: 76vw; margin-left: 0; width: 76vw; padding: 0 2vw; text-align: left !important; }
-    #lin-focus .lin-ann-note { font-size: 1.2rem; line-height: 1.6; text-align: left !important; }
+    #lin-focus .lin-ann-note { font-size: 0.95rem; line-height: 1.5; text-align: left !important; }
     #lin-focus .lin-vid-footer .lvf-handle { font-size: 0.6rem; }
     #lin-focus .lin-vid-footer .lvf-caption { font-size: 0.75rem; }
     #lin-focus .lin-vid-footer .lvf-meta { font-size: 0.55rem; }
