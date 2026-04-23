@@ -267,15 +267,15 @@ const VizStrike = (() => {
                 linCard.style.textAlign = "center";
 
                 const levels = [
-                    { level: 1, label: "Official", avg: 1.3 },
-                    { level: 2, label: "Direct address", avg: 2.1 },
-                    { level: 3, label: "Produced", avg: 1.9 },
-                    { level: 4, label: "TikTok-native", avg: 3.2 },
-                    { level: 5, label: "Pop culture", avg: 3.1 },
-                    { level: 6, label: "Meme", avg: 4.9 },
-                    { level: 7, label: "Game UI", avg: 5.9 }
+                    { level: 1, label: "Official", avg: 1.4 },
+                    { level: 2, label: "Direct address", avg: 2.2 },
+                    { level: 3, label: "Produced", avg: 2.1 },
+                    { level: 4, label: "TikTok-native", avg: 3.4 },
+                    { level: 5, label: "Pop culture", avg: 3.2 },
+                    { level: 6, label: "Meme", avg: 5.0 },
+                    { level: 7, label: "Game UI", avg: 6.4 }
                 ];
-                const maxAvg = 5.9;
+                const maxAvg = 6.4;
 
                 linCard.innerHTML = `
                     <div class="lin-ann" style="margin:0 0 20px 0;text-align:center;max-width:500px;">
