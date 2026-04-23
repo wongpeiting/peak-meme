@@ -453,13 +453,13 @@
                 const pkgChart = document.getElementById("pkg-chart");
                 if (pkgChart && !pkgChart.dataset.built) {
                     const levels = [
-                        { l: 7, label: "Gamified", avg: 5.9 },
-                        { l: 6, label: "Meme", avg: 4.9 },
-                        { l: 5, label: "Pop culture", avg: 3.1 },
-                        { l: 4, label: "TikTok-native", avg: 3.2 },
-                        { l: 3, label: "Produced", avg: 1.9 },
-                        { l: 2, label: "Direct address", avg: 2.1 },
-                        { l: 1, label: "Official", avg: 1.3 }
+                        { l: 7, label: "Gamified", avg: 6.4 },
+                        { l: 6, label: "Meme", avg: 5.0 },
+                        { l: 5, label: "Pop culture", avg: 3.2 },
+                        { l: 4, label: "TikTok-native", avg: 3.4 },
+                        { l: 3, label: "Produced", avg: 2.1 },
+                        { l: 2, label: "Direct address", avg: 2.2 },
+                        { l: 1, label: "Official", avg: 1.4 }
                     ];
                     pkgChart.innerHTML = `<div class="pkg-chart-inner" style="display:flex;gap:10px;">
                         <div style="display:flex;flex-direction:column;align-items:center;padding:0;width:20px;">
@@ -469,7 +469,7 @@
                         </div>
                         <div style="flex:1;display:flex;flex-direction:column;gap:10px;">` +
                     levels.map(lv => {
-                        const pct = (lv.avg / 5.9 * 100).toFixed(0);
+                        const pct = (lv.avg / 6.4 * 100).toFixed(0);
                         const barColor = lv.l >= 5 ? "#ff3b3b" : "#555";
                         return `<div style="display:flex;align-items:center;gap:10px;">
                             <div style="width:110px;text-align:right;font-size:0.9rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;white-space:nowrap;">${lv.label}</div>
@@ -490,7 +490,7 @@
                         </div>
                         <div style="flex:1;display:flex;flex-direction:column;gap:8px;">` +
                     levels.map(lv => {
-                        const pct = (lv.avg / 5.9 * 100).toFixed(0);
+                        const pct = (lv.avg / 6.4 * 100).toFixed(0);
                         const barColor = lv.l >= 5 ? "#ff3b3b" : "#555";
                         return `<div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:80px;text-align:right;font-size:0.7rem;color:#aaa;font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;white-space:nowrap;">${lv.label}</div>
@@ -500,6 +500,10 @@
                         </div>`;
                     }).join("") + `</div></div>`;
                     pkgChart.appendChild(mobileChart);
+                    const pkgFootnote = document.createElement("div");
+                    pkgFootnote.style.cssText = "font-size:0.65rem;color:#777;font-family:'Space Grotesk',sans-serif;margin-top:28px;text-align:right;";
+                    pkgFootnote.textContent = "Based on data of White House's first 600 TikToks as of April 22. Chart: Wong Pei Ting";
+                    pkgChart.appendChild(pkgFootnote);
                     pkgChart.dataset.built = "1";
                 }
                 break;
