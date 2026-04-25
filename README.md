@@ -66,4 +66,4 @@ No hate on D3 though. I think it's fantastic. I just haven't figured it out.
 
 ### Happy to hear from you
 
-I can be reached on pw2635@columbia.edu. Big thanks to [Soma](https://x.com/dangerscarf), [Kai Teoh](https://x.com/jkteoh) and [Dhrumil Mehta](https://x.com/DataDhrumil) for providing great feedback on this piece, allowing me to shape the project direction and make critical tweaks to narrative flow before I present it to the world.
+I can be reached on pw2635@columbia.edu. Big thanks to [Soma](https://x.com/dangerscarf), [Derrick Ho](https://x.com/derrickhozw), [Kai Teoh](https://x.com/jkteoh) and [Dhrumil Mehta](https://x.com/DataDhrumil) for providing great feedback on this piece, allowing me to shape the project direction and make critical tweaks to narrative flow before I present it to the world.
